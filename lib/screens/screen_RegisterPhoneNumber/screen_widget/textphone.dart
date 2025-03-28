@@ -9,7 +9,7 @@ class TextPhone extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Have an account yet?',
+          'У вас уже есть аккаунт?',
           style: TextStyle(
               fontFamily: 'Poppins-Regular',
               fontSize: 12,
@@ -21,9 +21,9 @@ class TextPhone extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {},
-          child: Text('Login',
+          child: Text('Войти',
               style: TextStyle(
-                  color: Colors.blue,
+                  color:  Color(0xFF2E6659),
                   fontFamily: 'TTSmalls-SemiBold',
                   fontSize: 18)),
         ),
@@ -37,27 +37,15 @@ class TextUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
       children: [
         Text(
-          'Для того чтобы продолжить необходимо ',
+          'Регистрация',
           style: TextStyle(
-              fontFamily: 'Poppins-Regular',
-              fontSize: 12,
-              height: 1.50,
-              fontWeight: FontWeight.w400),
-        ),
-        SizedBox(
-          width: 1,
-        ),
-        Text(
-          'Зарегистрироваться',
-          style: TextStyle(
-              fontFamily: 'Poppins-Regular',
+              fontFamily: 'poppins-semibold',
               color: Color(0xFF2E6659),
-              fontSize: 16,
-              fontWeight: FontWeight.w400),
+              fontSize: 36,
+              fontWeight: FontWeight.w700),
         )
       ],
     );

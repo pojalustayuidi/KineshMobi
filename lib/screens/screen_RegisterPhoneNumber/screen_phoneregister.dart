@@ -1,8 +1,10 @@
 
-import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen1_Widget/iconlogo.dart';
-import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen1_Widget/phonenumberform.dart';
-import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen1_Widget/textphone.dart';
+import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/iconlogo.dart';
+import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/phonenumberform.dart';
+import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/rectangler.dart';
 import 'package:flutter/material.dart';
+
+import 'screen_widget/textphone.dart';
 
 class ScreenRegister extends StatefulWidget {
   const ScreenRegister({super.key});
@@ -16,24 +18,12 @@ class ScreenRegisterUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: 30,),
-        IconsLogo(),
-        TextUp(),
-        SizedBox(
-          height: 50,
-        ),
-        PhoneNumberForm(),
-        SizedBox(
-          height: 48,
-        ),
-        Spacer(
-          flex: 1,
-        ),
-        TextPhone(),
-        SizedBox(height: 40,)
-      ],
+    return Center(
+      child: Column(
+          children: [SizedBox(height: 40,),IconsLogo(),
+            Rectangle(), Spacer(flex: 1,),TextPhone(), SizedBox(height: 40,)
+          ],
+      ),
     );
   }
 }

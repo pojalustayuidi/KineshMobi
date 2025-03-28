@@ -1,16 +1,15 @@
-import 'package:KineshmaApp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 // import 'Dialog/dialog_already_registred.dart';
 
-class ReadyButton extends StatefulWidget {
-  const ReadyButton({super.key});
+class ContinueButton extends StatefulWidget {
+  const ContinueButton({super.key, });
 
   @override
-  State<ReadyButton> createState() => _ReadyButtonState();
+  State<ContinueButton> createState() => _ContinueButtonState();
 }
 
-class _ReadyButtonState extends State<ReadyButton> {
+class _ContinueButtonState extends State<ContinueButton> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -19,25 +18,29 @@ class _ReadyButtonState extends State<ReadyButton> {
       child: SizedBox(
         width: screenWidth * 0.85,
         height: screenHeight * 0.055,
+
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushNamed('/home');
+            Navigator.of(context).pushNamed('/InputVerificationCode');
           },
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: Color(0xFF344E41),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16))),
           child: Text(
-            'Я готов! Продолжить',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Poppins-Regular'
-            ),
+            'Зарегистрироваться',
+            style: TextStyle(color: Colors.white),
           ),
         ),
       ),
     );
   }
 }
+
+// void _ShowDialog(BuildContext context, String phoneNumber) {
+//   showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return Dialogalready(phoneNumber: phoneNumber);
+//       });
+// }

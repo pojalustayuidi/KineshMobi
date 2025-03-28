@@ -1,4 +1,4 @@
-import 'package:KineshmaApp/screens/screen_Register/screen_register.dart';
+import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_register.dart';
 import 'package:KineshmaApp/screens/screen_account/screen_account.dart';
 import 'package:KineshmaApp/screens/screen_map/screen_map.dart';
 import 'package:KineshmaApp/screens/screen_mysavedschule/screen_mysavedschule.dart';

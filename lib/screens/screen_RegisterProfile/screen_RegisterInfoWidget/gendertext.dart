@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EmailText extends StatelessWidget {
-  const EmailText({super.key});
+class Gendertext extends StatelessWidget {
+  const Gendertext({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class EmailText extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              'Email',
+              'Пол',
               style: TextStyle(color: Color(0xFF344054),
                   fontFamily: 'Poppins-Regular',
                   fontSize: 14,

@@ -1,7 +1,6 @@
 import 'package:KineshmaApp/MainWidget/imageprofile.dart';
 import 'package:KineshmaApp/MainWidget/text.dart';
 import 'package:KineshmaApp/screens/screen_Home/Widgets/textgoodmorning.dart';
-import 'package:KineshmaApp/screens/screen_Register/screen_RegisterInfoWidget/emailtext.dart';
 import 'package:flutter/material.dart';
 
 import '../navigation_menu_bnb.dart';

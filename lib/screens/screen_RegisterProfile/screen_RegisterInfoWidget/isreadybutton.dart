@@ -1,15 +1,16 @@
+import 'package:KineshmaApp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 // import 'Dialog/dialog_already_registred.dart';
 
-class ButtonSec extends StatefulWidget {
-  const ButtonSec({super.key});
+class ReadyButton extends StatefulWidget {
+  const ReadyButton({super.key});
 
   @override
-  State<ButtonSec> createState() => _ButtonSecState();
+  State<ReadyButton> createState() => _ReadyButtonState();
 }
 
-class _ButtonSecState extends State<ButtonSec> {
+class _ReadyButtonState extends State<ReadyButton> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -20,15 +21,20 @@ class _ButtonSecState extends State<ButtonSec> {
         height: screenHeight * 0.055,
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushNamed('/RegisterInfo');
+            Navigator.of(context).pushNamed('/home');
           },
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: Color(0xFF344E41),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16))),
           child: Text(
-            'Continue',
-            style: TextStyle(color: Colors.white),
+            'Продолжить',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'Poppins-Regular'
+            ),
           ),
         ),
       ),
