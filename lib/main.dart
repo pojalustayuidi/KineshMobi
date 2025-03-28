@@ -1,7 +1,9 @@
 import 'package:KineshmaApp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+
+
+void main() async {
   runApp(const MyApp());
 }
 
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'App',
       debugShowCheckedModeBanner: false,
-      routes: routes,
+      routes: AppRoutes.routes,
       initialRoute: '/',
 
     );

@@ -1,6 +1,6 @@
-import 'package:KineshmaApp/screens/screen_InputVerificationCode/screen_inputverWidget/buttonsic.dart';
-import 'package:KineshmaApp/screens/screen_InputVerificationCode/screen_inputverWidget/otptextfield.dart';
-import 'package:KineshmaApp/screens/screen_InputVerificationCode/screen_inputverWidget/text_inputverificationcode.dart';
+import 'package:KineshmaApp/screens/screen_InputVerificationCode/widget_inputverificationcode/buttonsic.dart';
+import 'package:KineshmaApp/screens/screen_InputVerificationCode/widget_inputverificationcode/otptextfield.dart';
+import 'package:KineshmaApp/screens/screen_InputVerificationCode/widget_inputverificationcode/text_inputverificationcode.dart';
 import 'package:flutter/material.dart';
 
 class ScreenInputVerificationUI extends StatefulWidget {
@@ -19,12 +19,13 @@ class _ScreenInputVerificationUI extends State<ScreenInputVerificationUI> {
         SizedBox(
           height: 24,
         ),
-        InputVerification(),
+        InputVerification(phonenumber: '',),
         SizedBox(
-          height: 48,
+          height: 44,
         ),
         OTPTextField(),
-        ButtonSec()
+        SizedBox(height: 44,),
+        ButtonSec(),SizedBox(height: 44,),ReceiveDontCodetText()
       ],
     );
   }
