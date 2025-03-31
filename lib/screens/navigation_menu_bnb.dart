@@ -1,6 +1,6 @@
 import 'package:KineshmaApp/screens/screen_Home/screen_home.dart';
+import 'package:KineshmaApp/screens/screen_settings/screen_account.dart';
 import 'package:flutter/material.dart';
-import 'package:KineshmaApp/screens/screen_account/screen_account.dart';
 import 'package:KineshmaApp/screens/screen_map/screen_map.dart';
 import 'package:KineshmaApp/screens/screen_mysavedschule/screen_mysavedschule.dart';
 
@@ -15,7 +15,7 @@ class _MainNavigationWrapperState extends State<MainNavigationWrapper> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const ScreenHomeContent(), // Только контент без Scaffold
+    const ScreenHomeContent(),
     const ScreenSavedRasp(),
     const ScreenMap(),
     const ScreenSettings(),

@@ -15,7 +15,9 @@ class _ScreenSavedRasp extends State<ScreenSavedRasp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [WelcomeText()],
+      body: SafeArea(
+        child: Column(
+          children: [WelcomeText()],
+        ),
       ));
   }}

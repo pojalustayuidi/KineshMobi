@@ -10,12 +10,14 @@ class ScreenHomeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            WelcomeText(),
-            IconsLogo(),
-            Text('Добро пожаловать в приложение!'),
-          ],
+        child: SafeArea(
+          child: Column(
+            children: const [
+              WelcomeText(),
+              IconsLogo(),
+              Text('Добро пожаловать в приложение!'),
+            ],
+          ),
         ),
       ),
     );

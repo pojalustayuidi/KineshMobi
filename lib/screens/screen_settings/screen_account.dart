@@ -12,20 +12,15 @@ class ScreenSettings extends StatefulWidget {
 }
 
 class _ScreenSettings extends State<ScreenSettings> {
-  int selectedIndex = 3;
-  void _onItemTapped(int index){
-    setState(() {
-      selectedIndex = index;
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
+    return SafeArea(
+      child: Scaffold(
 
-    ),
 
-
-      body: Stack(
-        children: [ImageSettings(),TextEmail(),],
-      ),);
+        body: Stack(
+          children: [ImageSettings(),TextEmail(),],
+        ),),
+    );
   }}
