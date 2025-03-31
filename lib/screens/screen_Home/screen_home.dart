@@ -1,29 +1,26 @@
-import 'package:KineshmaApp/screens/navigation_menu_bnb.dart';
-import 'package:KineshmaApp/screens/screen_Home/Widgets/textgoodmorning.dart';
 import 'package:flutter/material.dart';
 
-class ScreenHomeUI extends StatefulWidget {
-  const ScreenHomeUI({super.key});
+import '../screen_RegisterPhoneNumber/screen_widget/iconlogo.dart';
+import 'Widgets/textgoodmorning.dart';
 
-  @override
-  State<ScreenHomeUI> createState() =>
-      _ScreenHomeUI();
-}
+class ScreenHomeContent extends StatelessWidget {
+  const ScreenHomeContent({super.key});
 
-class _ScreenHomeUI extends State<ScreenHomeUI> {
-  int selectedIndex = 0;
-  void _onItemTapped(int index){
-    setState(() {
-      selectedIndex = index;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [WelcomeText()],
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: const [
+              WelcomeText(),
+              IconsLogo(),
+              Text('Добро пожаловать в приложение!'),
+            ],
+          ),
+        ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(selectedIndex: selectedIndex, onItemTapped: _onItemTapped,),
     );
   }
 }
+
