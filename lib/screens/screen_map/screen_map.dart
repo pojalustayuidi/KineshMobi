@@ -28,5 +28,5 @@ class _ScreenMap extends State<ScreenMap> {
       body: Column(
         children: [WelcomeText(),Container(color: Colors.yellow, height: 300,width: 300,)],
       ),
-      bottomNavigationBar: MyBottomNavigationBar(selectedIndex: selectedIndex, onItemTapped: _onItemTapped),);
+    );
   }}

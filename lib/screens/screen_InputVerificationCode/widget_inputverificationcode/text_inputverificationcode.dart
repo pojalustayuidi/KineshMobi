@@ -1,5 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/phone_number.dart';
 
 class InputVerification extends StatelessWidget {
   final String phonenumber;
@@ -37,27 +37,46 @@ class InputVerification extends StatelessWidget {
   }
 }
 
-class ReceiveDontCodetText extends StatelessWidget {
+class ReceiveDontCodetText extends StatefulWidget {
   const ReceiveDontCodetText({super.key});
 
   @override
+  State<ReceiveDontCodetText> createState() => _ReceiveDontCodetTextState();
+}
+
+class _ReceiveDontCodetTextState extends State<ReceiveDontCodetText> {
+  String message = '';
+  bool codeResent = false;
+
+  void CodeResent() {
+    setState(() {
+      message = "Мы отправили код повторно";
+      codeResent = true;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      if (!codeResent) ...[
         Text(
           "Не пришел код?",
           style: TextStyle(color: Colors.black),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: CodeResent,
           child: Text('Отправить повторно',
               style: TextStyle(
                   color: Color(0xFF2E6659),
                   fontFamily: 'TTSmalls-SemiBold',
                   fontSize: 18)),
         ),
-      ],
-    );
+      ] else
+        Text(
+              "Мы отправили код повторно",
+              style: TextStyle(color: Color(0xFF098A2B3)),
+            ),
+          ]
+        );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:KineshmaApp/screens/navigation_menu_bnb.dart';
 import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_register.dart';
 import 'package:KineshmaApp/screens/screen_account/screen_account.dart';
 import 'package:KineshmaApp/screens/screen_map/screen_map.dart';
@@ -13,7 +14,7 @@ import '../screens/screen_RegisterPhoneNumber/screen_phoneregister.dart';
       '/': (context) => ScreenRegister(),
       '/InputVerificationCode': (context) => ScreenInputVerification(),
       '/RegisterInfo': (context) => ScreenRegisterInfo(),
-      '/home': (context) => ScreenHomeUI(),
+      '/home': (context) => MainNavigationWrapper(),
       '/saved': (context) => ScreenSavedRasp(),
       '/map' : (context) => ScreenMap(),
       '/profile' : (context) => ScreenSettings(),

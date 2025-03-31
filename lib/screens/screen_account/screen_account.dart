@@ -1,9 +1,7 @@
 import 'package:KineshmaApp/MainWidget/imageprofile.dart';
 import 'package:KineshmaApp/MainWidget/text.dart';
-import 'package:KineshmaApp/screens/screen_Home/Widgets/textgoodmorning.dart';
 import 'package:flutter/material.dart';
 
-import '../navigation_menu_bnb.dart';
 
 class ScreenSettings extends StatefulWidget {
   const ScreenSettings({super.key});
@@ -29,6 +27,5 @@ class _ScreenSettings extends State<ScreenSettings> {
 
       body: Stack(
         children: [ImageSettings(),TextEmail(),],
-      ),
-      bottomNavigationBar: MyBottomNavigationBar(selectedIndex: selectedIndex, onItemTapped: _onItemTapped),);
+      ),);
   }}
