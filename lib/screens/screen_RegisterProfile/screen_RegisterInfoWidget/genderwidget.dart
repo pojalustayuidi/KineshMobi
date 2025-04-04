@@ -12,24 +12,27 @@ class _genderState extends State<gender> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Radio<String>(value: "male",
-            groupValue: _selectedGender,
-            onChanged: (String? value) {
-              setState(() {
-                _selectedGender = value;
-              });
-            }),const Text("Мужской"),
-        Radio<String>(value: "female",
-            groupValue: _selectedGender,
-            onChanged: (String? value){
-          setState(() {
-            _selectedGender = value;
-          });
+    return Padding(
+      padding: const EdgeInsets.only(left: 8,right: 8),
+      child: Row(
+        children: [
+          Radio<String>(value: "male",
+              groupValue: _selectedGender,
+              onChanged: (String? value) {
+                setState(() {
+                  _selectedGender = value;
+                });
+              }),const Text("Мужской"),
+          Radio<String>(value: "female",
+              groupValue: _selectedGender,
+              onChanged: (String? value){
+            setState(() {
+              _selectedGender = value;
+            });
 
-            }),const Text('Женский')
-      ],
+              }),const Text('Женский')
+        ],
+      ),
     );
   }
 }

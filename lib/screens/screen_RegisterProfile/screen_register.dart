@@ -50,13 +50,8 @@ class ScreenRegisterInfoUI extends StatelessWidget {
         gender(),
         EmailText(),
         SizedBox(height: 6,),
-        EmailForm(),
-        Spacer(
-          flex: 1,
-        ),
-        ReadyButton(),
-    SizedBox(
-    height: 85,)
+        EmailForm(),Expanded(child: ReadyButton())
+   
       ],
     );
   }

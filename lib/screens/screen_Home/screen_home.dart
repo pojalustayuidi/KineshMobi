@@ -12,10 +12,9 @@ class ScreenHomeContent extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
-            children: const [
-              WelcomeText(),
-              IconsLogo(),
-              Text('Добро пожаловать в приложение!'),
+            children: [SizedBox(height: 16,),
+            IconsLogo(),
+            WelcomeText()
             ],
           ),
         ),

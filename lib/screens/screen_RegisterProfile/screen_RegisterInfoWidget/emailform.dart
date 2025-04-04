@@ -13,11 +13,13 @@ class _EmailFormState extends State<EmailForm> {
 
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
         Form(
           child: SizedBox(
             width: screenWidth * 0.96,
+            height: screenHeight * 0.055,
             child: TextFormField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(

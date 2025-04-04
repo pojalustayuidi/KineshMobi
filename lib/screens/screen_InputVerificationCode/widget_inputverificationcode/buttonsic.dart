@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../adaptiveDesign/adaptivedesign_widget.dart';
+
 // import 'Dialog/dialog_already_registred.dart';
 
 class ButtonSec extends StatefulWidget {
@@ -12,12 +14,10 @@ class ButtonSec extends StatefulWidget {
 class _ButtonSecState extends State<ButtonSec> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Center(
       child: SizedBox(
-        width: screenWidth * 0.65,
-        height: screenHeight * 0.058,
+        width: ScreenSize.width(context) * 0.65,
+        height: ScreenSize.height(context) * 0.058,
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).pushNamed('/RegisterInfo');

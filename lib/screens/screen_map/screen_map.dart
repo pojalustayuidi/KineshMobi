@@ -15,7 +15,6 @@ class _ScreenMap extends State<ScreenMap> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-
       body: SafeArea(
         child: Column(
           children: [WelcomeText(),Container(color: Colors.yellow, height: 300,width: 300,)],

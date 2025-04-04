@@ -1,14 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+
+import '../../../adaptiveDesign/adaptivedesign_widget.dart';
 
 class Gendertext extends StatelessWidget {
   const Gendertext({super.key});
 
   @override
+
   Widget build(BuildContext context) {
+
+
     return
       Padding(
         padding: const EdgeInsets.only(left: 16,right: 16),
-        child: Row(
+    child: Row(
           children: [
             Text(
               'Пол',
