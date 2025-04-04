@@ -1,8 +1,6 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../../adaptiveDesign/adaptivedesign_widget.dart';
 
 class Gendertext extends StatelessWidget {
   const Gendertext({super.key});

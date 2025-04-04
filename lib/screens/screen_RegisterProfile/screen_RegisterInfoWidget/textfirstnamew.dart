@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../adaptiveDesign/adaptivedesign_widget.dart';
 
 class FirstNameText extends StatelessWidget {
   const FirstNameText({super.key});
