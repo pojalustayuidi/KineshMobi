@@ -1,5 +1,6 @@
-import 'package:KineshmaApp/screens/screen_InputVerificationCode/screen_inputverivicationcode.dart';
 import 'package:flutter/material.dart';
+
+import '../../screen_input_verification_code/screen_inputverivicationcode.dart';
 
 // import 'Dialog/dialog_already_registred.dart';
 

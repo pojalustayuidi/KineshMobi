@@ -74,7 +74,7 @@ class _ReceiveDontCodetTextState extends State<ReceiveDontCodetText> {
       ] else
         Text(
               "Мы отправили код повторно",
-              style: TextStyle(color: Color(0xFF098A2B3)),
+              style: TextStyle(color: Color(0xff098a2b3)),
             ),
           ]
         );

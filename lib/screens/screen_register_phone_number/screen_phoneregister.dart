@@ -1,5 +1,5 @@
-import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/iconlogo.dart';
-import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/rectangler.dart';
+import 'package:KineshmaApp/screens/screen_register_phone_number/screen_widget/iconlogo.dart';
+import 'package:KineshmaApp/screens/screen_register_phone_number/screen_widget/rectangler.dart';
 import 'package:flutter/material.dart';
 
 import 'screen_widget/textphone.dart';

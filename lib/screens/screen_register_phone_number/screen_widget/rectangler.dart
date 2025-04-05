@@ -1,9 +1,10 @@
 import 'dart:math';
 
-import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/continuebutton.dart';
-import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/phonenumberform.dart';
-import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/textphone.dart';
+import 'package:KineshmaApp/screens/screen_register_phone_number/screen_widget/phonenumberform.dart';
 import 'package:flutter/material.dart';
+
+import 'continuebutton.dart';
+import 'textphone.dart';
 
 class Rectangle extends StatelessWidget {
   final TextEditingController controller;

@@ -1,13 +1,15 @@
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/emailform.dart';
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/emailtext.dart';
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/firstnameform.dart';
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/genderwidget.dart';
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/isreadybutton.dart';
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/lastnameForm.dart';
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/text_widgetl.dart';
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/textfirstnamew.dart';
-import 'package:KineshmaApp/screens/screen_RegisterProfile/screen_RegisterInfoWidget/textlastname.dart';
+
+import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/emailtext.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/text_widgetl.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/textfirstnamew.dart';
 import 'package:flutter/material.dart';
+
+import 'screen_RegisterInfoWidget/emailform.dart';
+import 'screen_RegisterInfoWidget/firstnameform.dart';
+import 'screen_RegisterInfoWidget/genderwidget.dart';
+import 'screen_RegisterInfoWidget/isreadybutton.dart';
+import 'screen_RegisterInfoWidget/lastnameForm.dart';
+import 'screen_RegisterInfoWidget/textlastname.dart';
 
 class ScreenRegisterInfo extends StatefulWidget {
   const ScreenRegisterInfo({super.key});

@@ -1,7 +1,9 @@
+import 'package:KineshmaApp/screens/screen_home/widgets_home/textgoodmorning.dart';
 import 'package:flutter/material.dart';
 
-import '../screen_RegisterPhoneNumber/screen_widget/iconlogo.dart';
-import 'Widgets/textgoodmorning.dart';
+import '../screen_register_phone_number/screen_widget/iconlogo.dart';
+
+
 
 class ScreenHomeContent extends StatelessWidget {
   const ScreenHomeContent({super.key});

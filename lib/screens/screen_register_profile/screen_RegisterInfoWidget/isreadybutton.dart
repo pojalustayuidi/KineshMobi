@@ -1,4 +1,3 @@
-import 'package:KineshmaApp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 // import 'Dialog/dialog_already_registred.dart';

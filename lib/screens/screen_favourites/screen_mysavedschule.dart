@@ -1,4 +1,4 @@
-import 'package:KineshmaApp/screens/screen_Home/Widgets/textgoodmorning.dart';
+import 'package:KineshmaApp/screens/screen_home/widgets_home/textgoodmorning.dart';
 import 'package:flutter/material.dart';
 
 

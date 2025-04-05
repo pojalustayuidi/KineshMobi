@@ -1,7 +1,8 @@
-import 'package:KineshmaApp/screens/screen_InputVerificationCode/widget_inputverificationcode/buttonsic.dart';
-import 'package:KineshmaApp/screens/screen_InputVerificationCode/widget_inputverificationcode/otptextfield.dart';
-import 'package:KineshmaApp/screens/screen_InputVerificationCode/widget_inputverificationcode/text_inputverificationcode.dart';
+import 'package:KineshmaApp/screens/screen_input_verification_code/widget_inputverificationcode/buttonsic.dart';
+import 'package:KineshmaApp/screens/screen_input_verification_code/widget_inputverificationcode/text_inputverificationcode.dart';
 import 'package:flutter/material.dart';
+
+import 'widget_inputverificationcode/otptextfield.dart';
 
 class ScreenInputVerificationUI extends StatefulWidget {
   final String phoneNumber;
