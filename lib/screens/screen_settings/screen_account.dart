@@ -1,5 +1,3 @@
-import 'package:KineshmaApp/MainWidget/imageprofile.dart';
-import 'package:KineshmaApp/MainWidget/text.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,7 +18,7 @@ class _ScreenSettings extends State<ScreenSettings> {
 
 
         body: Stack(
-          children: [ImageSettings(),TextEmail(),],
+          children: [],
         ),),
     );
   }}

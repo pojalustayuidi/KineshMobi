@@ -1,8 +1,8 @@
 import 'package:KineshmaApp/screens/screen_Home/screen_home.dart';
+import 'package:KineshmaApp/screens/screen_favourites/screen_mysavedschule.dart';
 import 'package:KineshmaApp/screens/screen_settings/screen_account.dart';
 import 'package:flutter/material.dart';
 import 'package:KineshmaApp/screens/screen_map/screen_map.dart';
-import 'package:KineshmaApp/screens/screen_mysavedschule/screen_mysavedschule.dart';
 
 class MainNavigationWrapper extends StatefulWidget {
   const MainNavigationWrapper({super.key});
