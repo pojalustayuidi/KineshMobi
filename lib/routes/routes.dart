@@ -5,13 +5,12 @@ import 'package:KineshmaApp/screens/screen_mysavedschule/screen_mysavedschule.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/screen_InputVerificationCode/screen_inputverivicationcode.dart';
 import '../screens/screen_RegisterPhoneNumber/screen_phoneregister.dart';
 import '../screens/screen_settings/screen_account.dart';
   class AppRoutes{
     static final Map<String, WidgetBuilder> routes = {
       '/': (context) => ScreenRegister(),
-      '/InputVerificationCode': (context) => ScreenInputVerification(),
+      //'/InputVerificationCode': (context) => ScreenInputVerification(),
       '/RegisterInfo': (context) => ScreenRegisterInfo(),
       '/home': (context) => MainNavigationWrapper(),
       '/saved': (context) => ScreenSavedRasp(),

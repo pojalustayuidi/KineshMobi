@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../adaptiveDesign/adaptivedesign_widget.dart';
+
 
 class EmailText extends StatelessWidget {
   const EmailText({super.key});

@@ -1,6 +1,6 @@
+import 'package:KineshmaApp/adaptive_design/adaptivedesign_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../adaptiveDesign/adaptivedesign_widget.dart';
 
 // import 'Dialog/dialog_already_registred.dart';
 

@@ -1,38 +1,54 @@
 import 'package:flutter/material.dart';
 
-class gender extends StatefulWidget {
-  const gender({super.key});
+class Gender extends StatefulWidget {
+  const Gender({super.key});
 
   @override
-  State<gender> createState() => _genderState();
+  State<Gender> createState() => _GenderState();
 }
 
-class _genderState extends State<gender> {
+class _GenderState extends State<Gender> {
   String? _selectedGender;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8,right: 8),
-      child: Row(
-        children: [
-          Radio<String>(value: "male",
-              groupValue: _selectedGender,
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedGender = value;
-                });
-              }),const Text("Мужской"),
-          Radio<String>(value: "female",
-              groupValue: _selectedGender,
-              onChanged: (String? value){
-            setState(() {
-              _selectedGender = value;
-            });
-
-              }),const Text('Женский')
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16),
+          child: Text(
+            'Пол',
+            style: TextStyle(
+                color: Color(0xFF344054),
+                fontFamily: 'Poppins-Regular',
+                fontSize: 14,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        Row(
+          children: [
+            Radio<String>(
+                value: "male",
+                groupValue: _selectedGender,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selectedGender = value;
+                  });
+                }),
+            const Text("Мужской"),
+            Radio<String>(
+                value: "female",
+                groupValue: _selectedGender,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selectedGender = value;
+                  });
+                }),
+            const Text('Женский')
+          ],
+        ),
+      ],
     );
   }
 }

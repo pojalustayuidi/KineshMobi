@@ -6,7 +6,12 @@ import 'package:KineshmaApp/screens/screen_RegisterPhoneNumber/screen_widget/tex
 import 'package:flutter/material.dart';
 
 class Rectangle extends StatelessWidget {
-  const Rectangle({super.key});
+  final TextEditingController controller;
+
+  const Rectangle({
+    super.key,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,35 +24,43 @@ class Rectangle extends StatelessWidget {
       child: Stack(
         children: [
           Align(
+            alignment: Alignment.topCenter,
             child: Container(
                 color: Color(0xFFDADADA),
                 width: screenWidth * 0.90,
                 height: screenHeight * 0.42),
-            alignment: Alignment.topCenter,
           ),
           Align(
-            child: TextUp(),
             alignment: Alignment.topCenter,
+            child: TextUp(),
           ),
           Positioned(
-            child: Text(
-              'Введите номер телефона',
-              style: TextStyle(fontFamily: 'Poppins-Regular',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
-            ),
             top: screenSize.height * 0.09,
             left: padding,
             right: padding,
+            child: Text(
+              'Введите номер телефона',
+              style: TextStyle(
+                  fontFamily: 'Poppins-Regular',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500),
+            ),
           ),
           Positioned(
-            child: PhoneNumberForm(),
             top: screenSize.height * 0.13,
             left: padding,
-          ),Positioned(child: ContinueButton(),
-          left: padding,
-          bottom: bottomPadding,
-          right: padding,)
+            child: PhoneNumberForm(
+              controller: controller,
+            ),
+          ),
+          Positioned(
+            left: padding,
+            bottom: bottomPadding,
+            right: padding,
+            child: ContinueButton(
+              phoneNumber: controller.value.text,
+            ),
+          )
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class IconsLogo extends StatelessWidget {
-  const IconsLogo({super.key});
+class ImageSettings extends StatelessWidget {
+  const ImageSettings({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,8 +9,11 @@ class IconsLogo extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
+            SizedBox(
+              height: 40,
+            ),
             Image.asset(
-              'assets/logobus.png',
+              'assets/Rectangle15.png',
               scale: 0.8,
             )
           ],

@@ -6,21 +6,20 @@ class TextEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: [
+        children: [SizedBox(height: 53,),
           Text(
             'Ольга Ивановна',
             style: TextStyle(
-              color: Colors.white,
-                fontFamily: 'Poppins-Regular',
-                fontSize: 20,
+              color: Color(0xFF344E41),
+                fontSize: 16,
                 fontWeight: FontWeight.w600),
           ),
           Text(
             'Olga@gmail.com',
-            style: TextStyle(
-                color: Colors.white,
+            style:TextStyle(
+                color: Colors.black,
                 fontFamily: 'Poppins-Regular',
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: FontWeight.w600),
           ),
         ]

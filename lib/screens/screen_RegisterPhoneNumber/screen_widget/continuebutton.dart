@@ -1,9 +1,12 @@
+import 'package:KineshmaApp/screens/screen_InputVerificationCode/screen_inputverivicationcode.dart';
 import 'package:flutter/material.dart';
 
 // import 'Dialog/dialog_already_registred.dart';
 
 class ContinueButton extends StatefulWidget {
-  const ContinueButton({super.key, });
+  final String phoneNumber;
+
+  const ContinueButton({super.key, required this.phoneNumber});
 
   @override
   State<ContinueButton> createState() => _ContinueButtonState();
@@ -18,10 +21,13 @@ class _ContinueButtonState extends State<ContinueButton> {
       child: SizedBox(
         width: screenWidth * 0.85,
         height: screenHeight * 0.055,
-
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pushNamed('/InputVerificationCode');
+            // Navigator.of(context).pushNamed('/InputVerificationCode');
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ScreenInputVerification(
+                      phoneNumber: widget.phoneNumber,
+                    )));
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF344E41),

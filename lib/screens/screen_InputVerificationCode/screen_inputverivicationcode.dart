@@ -4,7 +4,8 @@ import 'package:KineshmaApp/screens/screen_InputVerificationCode/widget_inputver
 import 'package:flutter/material.dart';
 
 class ScreenInputVerificationUI extends StatefulWidget {
-  const ScreenInputVerificationUI({super.key});
+  final String phoneNumber;
+  const ScreenInputVerificationUI({super.key, required this.phoneNumber});
 
   @override
   State<ScreenInputVerificationUI> createState() =>
@@ -19,7 +20,7 @@ class _ScreenInputVerificationUI extends State<ScreenInputVerificationUI> {
         SizedBox(
           height: 24,
         ),
-        InputVerification(phonenumber: '',),
+        InputVerification(phonenumber: widget.phoneNumber,),
         SizedBox(
           height: 44,
         ),
@@ -32,12 +33,15 @@ class _ScreenInputVerificationUI extends State<ScreenInputVerificationUI> {
 }
 
 class ScreenInputVerification extends StatelessWidget {
-  const ScreenInputVerification({super.key});
+  final String phoneNumber;
+  const  ScreenInputVerification({super.key,required this.phoneNumber, });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ScreenInputVerificationUI(),
+      body: ScreenInputVerificationUI(
+        phoneNumber: phoneNumber,
+      ),
       appBar: AppBar(
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(2.0),
