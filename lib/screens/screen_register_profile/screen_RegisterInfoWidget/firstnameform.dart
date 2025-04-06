@@ -22,8 +22,7 @@ class _FirstNameFormState extends State<FirstNameForm> {
                     OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                 hintText: 'Ольга',
                 hintStyle: TextStyle(
-                    color: Color(0xFF101828),
-                    fontFamily: 'Poppins-Regular',
+                    color: Colors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w400),
               ),

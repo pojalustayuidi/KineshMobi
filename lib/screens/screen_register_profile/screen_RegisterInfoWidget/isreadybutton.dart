@@ -32,7 +32,6 @@ class _ReadyButtonState extends State<ReadyButton> {
               color: Colors.white,
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              fontFamily: 'Poppins-Regular'
             ),
           ),
         ),

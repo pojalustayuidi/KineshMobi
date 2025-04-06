@@ -23,7 +23,7 @@ class InputVerification extends StatelessWidget {
             padding: const EdgeInsets.only(top: 14, right: 16, left: 16),
             child: Text(
               textAlign: TextAlign.center,
-              "Мы отправили SMS-Код на ваш номер телефона  $phonenumber",
+              "Мы отправили SMS-Код на вашу почту ",
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

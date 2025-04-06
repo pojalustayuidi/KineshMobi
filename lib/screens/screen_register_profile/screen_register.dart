@@ -1,10 +1,8 @@
 
-import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/emailtext.dart';
 import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/text_widgetl.dart';
 import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/textfirstnamew.dart';
 import 'package:flutter/material.dart';
 
-import 'screen_RegisterInfoWidget/emailform.dart';
 import 'screen_RegisterInfoWidget/firstnameform.dart';
 import 'screen_RegisterInfoWidget/genderwidget.dart';
 import 'screen_RegisterInfoWidget/isreadybutton.dart';
@@ -50,9 +48,8 @@ class ScreenRegisterInfoUI extends StatelessWidget {
         //Gendertext(),
         SizedBox(height: 6,),
         Gender(),
-        EmailText(),
-        SizedBox(height: 6,),
-        EmailForm(),Expanded(child: ReadyButton())
+        SizedBox(height: 32,),
+        ReadyButton()
    
       ],
     );

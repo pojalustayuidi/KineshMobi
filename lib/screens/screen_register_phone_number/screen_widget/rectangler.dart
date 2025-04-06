@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:KineshmaApp/screens/screen_register_phone_number/screen_widget/phonenumberform.dart';
+import 'package:KineshmaApp/screens/screen_register_phone_number/screen_widget/email_form_field.dart';
 import 'package:flutter/material.dart';
 
 import 'continuebutton.dart';
@@ -40,7 +40,7 @@ class Rectangle extends StatelessWidget {
             left: padding,
             right: padding,
             child: Text(
-              'Введите номер телефона',
+              'Введите ваш Email',
               style: TextStyle(
                   fontFamily: 'Poppins-Regular',
                   fontSize: 14,
@@ -50,8 +50,7 @@ class Rectangle extends StatelessWidget {
           Positioned(
             top: screenSize.height * 0.13,
             left: padding,
-            child: PhoneNumberForm(
-              controller: controller,
+            child: EmailForm(
             ),
           ),
           Positioned(

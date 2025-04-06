@@ -23,8 +23,7 @@ class _LastNameFormState extends State<LastNameForm> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)
                   ),hintText: 'Ивановна ',hintStyle: TextStyle(
-                    color: Color(0xFF101828),
-                    fontFamily: 'Poppins-Regular',
+                    color: Colors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w400),
                 ),
