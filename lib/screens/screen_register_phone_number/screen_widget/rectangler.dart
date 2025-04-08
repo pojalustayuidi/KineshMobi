@@ -1,67 +1,62 @@
 import 'dart:math';
-
-import 'package:KineshmaApp/screens/screen_register_phone_number/screen_widget/email_form_field.dart';
 import 'package:flutter/material.dart';
-
 import 'continuebutton.dart';
 import 'textphone.dart';
+import 'email_form_field.dart'; // Предполагаю, что это ваш файл с EmailForm
 
 class Rectangle extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+  final VoidCallback onSubmit;
+  final bool isLoading;
 
   const Rectangle({
     super.key,
-    required this.controller,
+    required this.usernameController,
+    required this.onSubmit,
+    required this.isLoading,
+    required this.passwordController,
   });
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final padding = max(16.0, screenSize.width * 0.07);
-    final bottomPadding = max(16.0, screenSize.height * 0.1);
+    final bottomPadding = max(16.0, screenSize.height * 0.010);
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+
     return Center(
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-                color: Color(0xFFDADADA),
-                width: screenWidth * 0.90,
-                height: screenHeight * 0.42),
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: TextUp(),
-          ),
-          Positioned(
-            top: screenSize.height * 0.09,
-            left: padding,
-            right: padding,
-            child: Text(
-              'Введите ваш Email',
+      child: Container(
+        color: Color(0xFFDADADA),
+        width: screenWidth * 0.90,
+        padding: EdgeInsets.all(padding), // Внутренние отступы внутри контейнера
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // Контейнер подстраивается под содержимое
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextUp(), // Ваш виджет TextUp
+            SizedBox(height: 8),
+            Text(
+              "Придумайте Логин и пароль",
               style: TextStyle(
-                  fontFamily: 'Poppins-Regular',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-          Positioned(
-            top: screenSize.height * 0.13,
-            left: padding,
-            child: EmailForm(
+            SizedBox(height: 16),
+            EmailForm(
+              usernameController: usernameController,
+              passwordController: passwordController,
             ),
-          ),
-          Positioned(
-            left: padding,
-            bottom: bottomPadding,
-            right: padding,
-            child: ContinueButton(
-              phoneNumber: controller.value.text,
+            SizedBox(height: 16),
+            ContinueButton(
+              text: 'Зарегистрироваться',
+              onPressed: onSubmit,
+              isLoading: isLoading,
             ),
-          )
-        ],
+            SizedBox(height: bottomPadding),
+          ],
+        ),
       ),
     );
   }

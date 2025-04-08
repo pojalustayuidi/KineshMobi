@@ -4,14 +4,10 @@ import 'package:flutter/material.dart';
 
 // import 'Dialog/dialog_already_registred.dart';
 
-class ButtonSec extends StatefulWidget {
-  const ButtonSec({super.key});
+class ButtonSec extends StatelessWidget {
+  final VoidCallback onPressed;
+  const ButtonSec({super.key, required this.onPressed});
 
-  @override
-  State<ButtonSec> createState() => _ButtonSecState();
-}
-
-class _ButtonSecState extends State<ButtonSec> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -19,9 +15,7 @@ class _ButtonSecState extends State<ButtonSec> {
         width: ScreenSize.width(context) * 0.65,
         height: ScreenSize.height(context) * 0.058,
         child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed('/RegisterInfo');
-          },
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF344E41),
               shape: RoundedRectangleBorder(

@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 
 // import 'Dialog/dialog_already_registred.dart';
 
-class ReadyButton extends StatefulWidget {
-  const ReadyButton({super.key});
+class ReadyButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  const ReadyButton({super.key, required this.onPressed});
 
-  @override
-  State<ReadyButton> createState() => _ReadyButtonState();
-}
-
-class _ReadyButtonState extends State<ReadyButton> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -19,9 +15,7 @@ class _ReadyButtonState extends State<ReadyButton> {
         width: screenWidth * 0.85,
         height: screenHeight * 0.055,
         child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF344E41),
               shape: RoundedRectangleBorder(

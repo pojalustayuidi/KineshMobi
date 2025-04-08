@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-class LastNameForm extends StatefulWidget {
-  const LastNameForm({super.key});
-
-  @override
-  State<LastNameForm> createState() => _LastNameFormState();
-}
-
-class _LastNameFormState extends State<LastNameForm> {
+class LastNameForm extends StatelessWidget {
+  final TextEditingController controller;
+  const LastNameForm({super.key, required this.controller});
 
   @override
 
@@ -19,6 +14,7 @@ class _LastNameFormState extends State<LastNameForm> {
             child: SizedBox(
               width: screenWidth * 0.96,
               child: TextFormField(
+                controller: controller,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)

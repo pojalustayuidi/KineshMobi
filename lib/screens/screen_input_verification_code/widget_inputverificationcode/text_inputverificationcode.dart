@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 
 class InputVerification extends StatelessWidget {
-  final String phonenumber;
 
-  const InputVerification({required this.phonenumber});
+  const InputVerification();
 
   @override
   Widget build(BuildContext context) {
