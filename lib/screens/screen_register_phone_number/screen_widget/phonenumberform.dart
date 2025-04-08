@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter/services.dart';
 
-
 class PhoneNumberForm extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
 
-  const PhoneNumberForm({super.key, required this.controller});
+  const PhoneNumberForm({
+    super.key,
+    required this.usernameController,
+    required this.passwordController,
+  });
 
   @override
   State<PhoneNumberForm> createState() => _PhoneNumberFormState();
 }
 
 class _PhoneNumberFormState extends State<PhoneNumberForm> {
-
   bool isCodeSent = false;
 
   @override
@@ -29,7 +32,6 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
               Form(
                 child: IntlPhoneField(
                   flagsButtonPadding: EdgeInsets.only(left: 8, right: 8),
-                  controller: widget.controller,
                   initialCountryCode: 'RU',
                   showDropdownIcon: false,
                   keyboardType: TextInputType.phone,

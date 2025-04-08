@@ -14,8 +14,7 @@ class EmailText extends StatelessWidget {
           children: [
             Text(
                 'Email',
-              style: TextStyle(color: Color(0xFF344054),
-                  fontFamily: 'Poppins-Regular',
+              style: TextStyle(color: Color(0xFF344E41),
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
             ),

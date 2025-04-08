@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
-class FirstNameForm extends StatefulWidget {
-  const FirstNameForm({super.key});
+class FirstNameForm extends StatelessWidget {
+  final TextEditingController controller;
+  const FirstNameForm({super.key, required this.controller});
 
-  @override
-  State<FirstNameForm> createState() => _FirstNameFormState();
-}
-
-class _FirstNameFormState extends State<FirstNameForm> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -17,13 +13,13 @@ class _FirstNameFormState extends State<FirstNameForm> {
           child: SizedBox(
             width: screenWidth * 0.96,
             child: TextFormField(
+              controller: controller,
               decoration: InputDecoration(
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                 hintText: 'Ольга',
                 hintStyle: TextStyle(
-                    color: Color(0xFF101828),
-                    fontFamily: 'Poppins-Regular',
+                    color: Colors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w400),
               ),

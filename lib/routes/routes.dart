@@ -11,7 +11,7 @@ import '../screens/screen_settings/screen_account.dart';
     static final Map<String, WidgetBuilder> routes = {
       '/': (context) => ScreenRegister(),
       //'/InputVerificationCode': (context) => ScreenInputVerification(),
-      '/RegisterInfo': (context) => ScreenRegisterInfo(),
+      '/RegisterInfo': (context) => ScreenRegisterInfo(username: '', userId: '',),
       '/home': (context) => MainNavigationWrapper(),
       '/saved': (context) => ScreenSavedRasp(),
       '/map' : (context) => ScreenMap(),
