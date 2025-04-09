@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TextPhone extends StatelessWidget {
-  const TextPhone({super.key});
+class TextDontHaveAccount extends StatelessWidget {
+  const TextDontHaveAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class TextPhone extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'У вас уже есть аккаунт?',
+          'У вас нет аккаунта?',
           style: TextStyle(
               fontSize: 12, height: 1.50, fontWeight: FontWeight.w400),
         ),
@@ -18,9 +18,9 @@ class TextPhone extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pushNamed('/Login');
+            Navigator.of(context).pushNamed('/');
           },
-          child: Text('Войти',
+          child: Text('Зарегистрироваться',
               style: TextStyle(
                   color: Color(0xFF2E6659),
                   fontFamily: 'TTSmalls-SemiBold',
@@ -31,15 +31,15 @@ class TextPhone extends StatelessWidget {
   }
 }
 
-class TextUp extends StatelessWidget {
-  const TextUp({super.key});
+class TextLogin extends StatelessWidget {
+  const TextLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Text(
-          'Регистрация',
+          'Вход',
           style: TextStyle(
               color: Color(0xFF2E6659),
               fontSize: 36,

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class WelcomeText extends StatelessWidget {
-  const WelcomeText({super.key});
+  final String firstName;
+  final String lastName;
+
+  const WelcomeText(
+      {super.key, required this.firstName, required this.lastName});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class WelcomeText extends StatelessWidget {
       ),
       SizedBox(height: 4),
       Text(
-        'Ольга Ивановна',
+        '$firstName, $lastName',
         style: TextStyle(
             color: Color(0xFF344E41),
             fontFamily: 'Poppins-Regular',
@@ -24,14 +28,7 @@ class WelcomeText extends StatelessWidget {
             fontWeight: FontWeight.w600),
       ),
       SizedBox(height: 4),
-      Text(
-        'Введите остановку или выберите из предложенного списка свою ',
-        style: TextStyle(
-            color: Color(0xFF667085),
-            fontFamily: 'Poppins-Regular',
-            fontSize: 14,
-            fontWeight: FontWeight.w400),
-      )
+
     ]);
   }
 }

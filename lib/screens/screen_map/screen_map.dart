@@ -16,7 +16,7 @@ class _ScreenMap extends State<ScreenMap> {
       body: SafeArea(
         child: Column(
           children: [
-            WelcomeText(),
+            WelcomeText(firstName: '', lastName: '',),
             Container(
               color: Colors.yellow,
               height: 300,
