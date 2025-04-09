@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// import 'Dialog/dialog_already_registred.dart';
-
 class ReadyButton extends StatelessWidget {
   final VoidCallback onPressed;
   const ReadyButton({super.key, required this.onPressed});

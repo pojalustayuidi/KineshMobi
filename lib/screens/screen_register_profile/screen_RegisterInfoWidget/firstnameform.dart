@@ -14,6 +14,7 @@ class FirstNameForm extends StatelessWidget {
             width: screenWidth * 0.96,
             child: TextFormField(
               controller: controller,
+              keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(12)),

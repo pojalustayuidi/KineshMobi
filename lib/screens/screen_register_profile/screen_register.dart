@@ -1,3 +1,4 @@
+import 'package:KineshmaApp/screens/navigation_menu_bnb.dart';
 import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/text_widgetl.dart';
 import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/textfirstnamew.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,7 +14,7 @@ class ScreenRegisterInfo extends StatefulWidget {
   final String username;
   final String userId;
 
-   const ScreenRegisterInfo(
+  const ScreenRegisterInfo(
       {super.key, required this.username, required this.userId});
 
   @override
@@ -26,12 +27,11 @@ class ScreenRegisterInfoUI extends StatelessWidget {
   final String gender;
   final VoidCallback onSave;
 
-  const ScreenRegisterInfoUI(
-      {super.key,
-      required this.firstNameController,
-      required this.lastNameController,
-      required this.gender,
-      required this.onSave});
+  const ScreenRegisterInfoUI({super.key,
+    required this.firstNameController,
+    required this.lastNameController,
+    required this.gender,
+    required this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,9 @@ class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
         'gender': _selectedGender,
         'updateAt': DateTime.now().toIso8601String()
       });
-      ScaffoldMessenger.of(context)
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => MainNavigationWrapper(firstName: _firtstNameController.text,lastName: _lastNameController.text,),));
+          ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Данные успешно сохраненны")));
     } catch (e) {
       ScaffoldMessenger.of(context)
@@ -104,11 +106,12 @@ class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _firtstNameController.dispose();
     _lastNameController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
