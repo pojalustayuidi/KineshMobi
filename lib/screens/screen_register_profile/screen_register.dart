@@ -24,14 +24,17 @@ class ScreenRegisterInfo extends StatefulWidget {
 class ScreenRegisterInfoUI extends StatelessWidget {
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
+  final TextEditingController userNameController;
   final String gender;
   final VoidCallback onSave;
 
-  const ScreenRegisterInfoUI({super.key,
-    required this.firstNameController,
-    required this.lastNameController,
-    required this.gender,
-    required this.onSave});
+  const ScreenRegisterInfoUI(
+      {super.key,
+      required this.firstNameController,
+      required this.lastNameController,
+      required this.gender,
+      required this.onSave,
+      required this.userNameController});
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +48,17 @@ class ScreenRegisterInfoUI extends StatelessWidget {
         SizedBox(
           height: 6,
         ),
-        FirstNameForm(controller: firstNameController,),
+        FirstNameForm(
+          controller: firstNameController,
+        ),
         SizedBox(height: 16),
         LastNameText(),
         SizedBox(
           height: 6,
         ),
-        LastNameForm(controller: lastNameController,),
+        LastNameForm(
+          controller: lastNameController,
+        ),
         SizedBox(
           height: 16,
         ),
@@ -67,7 +74,9 @@ class ScreenRegisterInfoUI extends StatelessWidget {
         SizedBox(
           height: 32,
         ),
-        ReadyButton(onPressed: onSave,)
+        ReadyButton(
+          onPressed: onSave,
+        )
       ],
     );
   }
@@ -76,6 +85,7 @@ class ScreenRegisterInfoUI extends StatelessWidget {
 class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
   final TextEditingController _firtstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   final String _selectedGender = 'Не указан';
 
   Future<void> _savetoFirebase() async {
@@ -95,9 +105,16 @@ class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
         'gender': _selectedGender,
         'updateAt': DateTime.now().toIso8601String()
       });
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => MainNavigationWrapper(firstName: _firtstNameController.text,lastName: _lastNameController.text,),));
-          ScaffoldMessenger.of(context)
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainNavigationWrapper(
+              firstName: _firtstNameController.text,
+              lastName: _lastNameController.text,
+              userName: _userNameController.text,
+            ),
+          ));
+      ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Данные успешно сохраненны")));
     } catch (e) {
       ScaffoldMessenger.of(context)
@@ -119,7 +136,7 @@ class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
         firstNameController: _firtstNameController,
         lastNameController: _lastNameController,
         gender: _selectedGender,
-        onSave: _savetoFirebase,
+        onSave: _savetoFirebase, userNameController: _userNameController,
       ),
       appBar: AppBar(),
     );

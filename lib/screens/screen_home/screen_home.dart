@@ -31,7 +31,8 @@ class _ScreenHomeContentState extends State<ScreenHomeContent> {
     return Scaffold(
       body: SingleChildScrollView(
         child: (SafeArea(
-          child: Column(children: [
+          child: Column(
+              children: [
             SizedBox(
               height: 16,
             ),

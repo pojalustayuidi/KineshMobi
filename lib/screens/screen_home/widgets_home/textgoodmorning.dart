@@ -9,7 +9,8 @@ class WelcomeText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return Column(
+        children: [
       Text(
         'Доброе утро',
         style: TextStyle(
@@ -19,6 +20,7 @@ class WelcomeText extends StatelessWidget {
             fontWeight: FontWeight.w500),
       ),
       SizedBox(height: 4),
+
       Text(
         '$firstName, $lastName',
         style: TextStyle(

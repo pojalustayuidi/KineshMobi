@@ -53,7 +53,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
             MaterialPageRoute(
               builder: (context) => MainNavigationWrapper(
                 firstName: firstName,
-                lastName: lastName,
+                lastName: lastName, userName: _usernameController.text
               ),
             ),
           );
