@@ -18,6 +18,22 @@ class ScreenSettings extends StatefulWidget {
 }
 
 class _ScreenSettings extends State<ScreenSettings> {
+  late String _firstName;
+  late String _userName;
+  late String _lastName;
+  @override
+  void initState(){
+    super.initState();
+    _firstName = widget.firstName;
+    _lastName = widget.lastName;
+    _userName = widget.userName;
+  }
+  void _updateName(String newFirstName, String newLastName){
+    setState(() {
+      _firstName = newFirstName;
+      _lastName = newLastName;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,14 +41,14 @@ class _ScreenSettings extends State<ScreenSettings> {
         body: Column(
           children: [
             ContainergradientText(
-              firstName: widget.firstName,
-              lastName: widget.lastName,
-              userName: widget.userName,
+              firstName: _firstName,
+              lastName: _lastName,
+              userName: _userName,
             ),
             SizedBox(
               height: 16,
             ),
-            SettingsWidget()
+            SettingsWidget(firstName: _firstName, lastName: _lastName, userName: _userName, onNameChanged: _updateName,)
           ],
         ),
       ),

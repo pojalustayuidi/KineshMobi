@@ -1,4 +1,5 @@
 import 'package:KineshmaApp/screens/navigation_menu_bnb.dart';
+import 'package:KineshmaApp/screens/screen_account/screen_account.dart';
 import 'package:KineshmaApp/screens/screen_favourites/screen_mysavedschule.dart';
 import 'package:KineshmaApp/screens/screen_login/screen_login.dart';
 import 'package:KineshmaApp/screens/screen_map/screen_map.dart';
@@ -18,5 +19,6 @@ import '../screens/screen_settings/screen_settings.dart';
       '/saved': (context) => ScreenSavedRasp(),
       '/map' : (context) => ScreenMap(),
       '/profile' : (context) => ScreenSettings(firstName: '', lastName: '', userName: '',),
+      '/account' : (context) => ScreenAccount(firstName: '', lastName: '', userName: '',)
     };
     }
