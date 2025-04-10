@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../screen_register_phone_number/screen_widget/continuebutton.dart';
 import '../../screen_register_phone_number/screen_widget/email_form_field.dart';
 
-
 class RectangleLogin extends StatelessWidget {
   final TextEditingController usernameController;
   final TextEditingController passwordController;
@@ -30,15 +29,17 @@ class RectangleLogin extends StatelessWidget {
       child: Container(
         color: Color(0xFFDADADA),
         width: screenWidth * 0.90,
-        padding: EdgeInsets.all(padding), // Внутренние отступы внутри контейнера
+        padding: EdgeInsets.all(padding),
+        // Внутренние отступы внутри контейнера
         child: Column(
-          mainAxisSize: MainAxisSize.min, // Контейнер подстраивается под содержимое
+          mainAxisSize: MainAxisSize.min,
+          // Контейнер подстраивается под содержимое
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextLogin(), // Ваш виджет TextUp
             SizedBox(height: 8),
             Text(
-              "Введите логин и пароль",
+              "Введите ваш логин и пароль, если вы уже регистрировались",
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,

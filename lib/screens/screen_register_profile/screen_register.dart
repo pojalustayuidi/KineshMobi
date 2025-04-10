@@ -109,9 +109,8 @@ class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
           context,
           MaterialPageRoute(
             builder: (context) => MainNavigationWrapper(
-              firstName: _firtstNameController.text,
-              lastName: _lastNameController.text,
-              userName: _userNameController.text,
+              userName: widget.username,
+
             ),
           ));
       ScaffoldMessenger.of(context)

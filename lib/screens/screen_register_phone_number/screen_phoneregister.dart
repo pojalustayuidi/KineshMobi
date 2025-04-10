@@ -23,30 +23,36 @@ class _ScreenRegisterState extends State<ScreenRegister> {
 
   Future<void> _sendVerificationCode() async {
     setState(() => _isLoading = true);
-    if (_usernameController.text.isEmpty) {
+    final password = _passwordController.text.trim();
+    if (_usernameController.text.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Введите UserName"),
+          content: Text("Введите Логин и пароль"),
         ),
       );
       setState(() => _isLoading = false);
       return;
     }
     try {
-      await AuthService.register(_usernameController.text, _passwordController.text);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Регистрация прошла успешна')));
+      await AuthService.register(
+          _usernameController.text, _passwordController.text);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Регистрация прошла успешна')));
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-          ScreenRegisterInfo(username: _usernameController.text, userId: _usernameController.text,),
+          builder: (context) => ScreenRegisterInfo(
+            username: _usernameController.text,
+            userId: _usernameController.text,
+          ),
         ),
       );
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Ошибка $e")));
+    }finally{
+      setState(() => _isLoading = false);
     }
-    setState(() => _isLoading = false);
   }
 
   @override
@@ -59,6 +65,7 @@ class _ScreenRegisterState extends State<ScreenRegister> {
               height: 40,
             ),
             IconsLogo(),
+            SizedBox(height: 16,),
             Rectangle(
               usernameController: _usernameController,
               passwordController: _passwordController,

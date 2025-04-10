@@ -20,21 +20,22 @@ class ContainergradientText extends StatelessWidget {
             'assets/Rectangle15.png',
             scale: 0.8,
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 33, left: 21),
-                child: Text(
+          Padding(
+            padding: const EdgeInsets.only(top: 25,left: 21),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                   '$lastName $firstName',
                   style:
                       TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                 ),
-              ),
-              Text(
-                '$userName',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-              )
-            ],
+                Text(
+                  '@$userName',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                )
+              ],
+            ),
           ),
         ],
       ),

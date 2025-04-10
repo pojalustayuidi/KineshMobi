@@ -5,13 +5,15 @@ class MyNameWidget extends StatefulWidget {
   final String firstName;
   final String lastName;
   final String userName;
-  final Function(String, String) onNameChanged; // Callback для обновления имени и фамилии
+  final Function(String, String)
+      onNameChanged; // Callback для обновления имени и фамилии
 
   const MyNameWidget({
     super.key,
     required this.firstName,
     required this.lastName,
-    required this.onNameChanged, required this.userName,
+    required this.onNameChanged,
+    required this.userName,
   });
 
   @override
@@ -21,18 +23,21 @@ class MyNameWidget extends StatefulWidget {
 class _MyNameWidgetState extends State<MyNameWidget> {
   late String _firstName;
   late String _lastName;
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _firstName = widget.firstName;
     _lastName = widget.lastName;
   }
+
   bool _isLoading = false;
+
   void _showEditNameOverlay(BuildContext context) {
-    TextEditingController firstNameController = TextEditingController(
-        text: _firstName);
-    TextEditingController lastNameController = TextEditingController(
-        text: _lastName);
+    TextEditingController firstNameController =
+        TextEditingController(text: _firstName);
+    TextEditingController lastNameController =
+        TextEditingController(text: _lastName);
 
     showModalBottomSheet(
       context: context,
@@ -44,10 +49,7 @@ class _MyNameWidgetState extends State<MyNameWidget> {
       builder: (BuildContext context) {
         return Padding(
           padding: EdgeInsets.only(
-            bottom: MediaQuery
-                .of(context)
-                .viewInsets
-                .bottom,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
             left: 16.0,
             right: 16.0,
             top: 16.0,
@@ -97,30 +99,41 @@ class _MyNameWidgetState extends State<MyNameWidget> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: _isLoading
-                  ? null
-                  : () async {
-                    try {
-                      await FirebaseFirestore.instance.collection('users').doc(
-                          widget.userName).update({
-                        'firstName': firstNameController.text,
-                        'lastName': lastNameController.text,
-                      });
-                      setState(() {
-                        _firstName = firstNameController.text;
-                        _lastName = lastNameController.text;
-                      });
-                      widget.onNameChanged(
-                        _firstName,
-                        _lastName,
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Данные успешно обновлены'),),);
-                      Navigator.pop(context);
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Ошибка при обновлении: $e'),),);
-                    }
-                  },
+                      ? null
+                      : () async {
+                          setState(() => _isLoading = true);
+                          try {
+                            await FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(widget.userName)
+                                .update({
+                              'firstName': firstNameController.text,
+                              'lastName': lastNameController.text,
+                            });
+                            setState(() {
+                              _firstName = firstNameController.text;
+                              _lastName = lastNameController.text;
+                            });
+                            widget.onNameChanged(
+                              _firstName,
+                              _lastName,
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Данные успешно обновлены'),
+                              ),
+                            );
+                            Navigator.pop(context);
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Ошибка при обновлении: $e'),
+                              ),
+                            );
+                          } finally {
+                            setState(()=> _isLoading = false);
+                          }
+                        },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF344E41),
                     foregroundColor: Colors.white,
@@ -130,11 +143,13 @@ class _MyNameWidgetState extends State<MyNameWidget> {
                     ),
                   ),
                   child: _isLoading
-                  ? const CircularProgressIndicator(color: Colors.red,)
-                  : const Text(
-                    'Сохранить',
-                    style: TextStyle(fontSize: 16),
-                  ),
+                      ? const CircularProgressIndicator(
+                          color: Colors.red,
+                        )
+                      : const Text(
+                          'Сохранить',
+                          style: TextStyle(fontSize: 16),
+                        ),
                 ),
               ),
               const SizedBox(height: 16),

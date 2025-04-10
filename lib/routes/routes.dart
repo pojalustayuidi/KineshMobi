@@ -15,10 +15,10 @@ import '../screens/screen_settings/screen_settings.dart';
       '/Login' : (context) => ScreenLogin(),
       //'/InputVerificationCode': (context) => ScreenInputVerification(),
       '/RegisterInfo': (context) => ScreenRegisterInfo(username: '', userId: '',),
-      '/home': (context) => MainNavigationWrapper(firstName: '', lastName: '', userName: '',),
+      '/home': (context) => MainNavigationWrapper(userName: '',),
       '/saved': (context) => ScreenSavedRasp(),
-      '/map' : (context) => ScreenMap(),
-      '/profile' : (context) => ScreenSettings(firstName: '', lastName: '', userName: '',),
+      '/map' : (context) => ScreenMap(userName: '',),
+      '/profile' : (context) => ScreenSettings(userName: '',),
       '/account' : (context) => ScreenAccount(firstName: '', lastName: '', userName: '',)
     };
     }

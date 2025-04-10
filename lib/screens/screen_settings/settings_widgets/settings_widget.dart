@@ -1,4 +1,5 @@
 import 'package:KineshmaApp/screens/screen_account/screen_account.dart';
+import 'package:KineshmaApp/screens/screen_login/screen_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,12 +9,11 @@ class SettingsWidget extends StatelessWidget {
   final String userName;
   final Function(String, String) onNameChanged;
 
-  const SettingsWidget(
-      {super.key,
-      required this.firstName,
-      required this.lastName,
-      required this.userName,
-      required this.onNameChanged});
+  const SettingsWidget({super.key,
+    required this.firstName,
+    required this.lastName,
+    required this.userName,
+    required this.onNameChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,8 @@ class SettingsWidget extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ScreenAccount(
+                  builder: (context) =>
+                      ScreenAccount(
                         firstName: firstName,
                         lastName: lastName,
                         userName: userName,
@@ -53,14 +54,29 @@ class SettingsWidget extends StatelessWidget {
               style: TextStyle(color: Color(0xFF344E41)),
             )),
         Divider(),
-        TextButton.icon(
+        TextButton(
           onPressed: () {},
+          child: Text(
+            'Уведомления',
+            style: TextStyle(
+              color: Color(0xFF344E41),
+            ),
+          ),
+        ),
+        Divider(),
+        TextButton.icon(
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context) => const ScreenLogin()),
+                  (Route<dynamic> route) => false,
+            );
+          },
           icon: SvgPicture.asset('assets/Logout.svg'),
           label: Text(
             'Выйти из аккаунта',
             style: TextStyle(color: Color(0xFF344E41)),
           ),
-        )
+        ),
       ],
     );
   }
