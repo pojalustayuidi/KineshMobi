@@ -6,7 +6,7 @@ class MyNameWidget extends StatefulWidget {
   final String lastName;
   final String userName;
   final Function(String, String)
-      onNameChanged; // Callback для обновления имени и фамилии
+      onNameChanged;
 
   const MyNameWidget({
     super.key,
@@ -71,7 +71,7 @@ class _MyNameWidgetState extends State<MyNameWidget> {
                   IconButton(
                     icon: const Icon(Icons.close),
                     onPressed: () {
-                      Navigator.pop(context); // Закрыть оверлей
+                      Navigator.pop(context);
                     },
                   ),
                 ],
@@ -188,7 +188,7 @@ class _MyNameWidgetState extends State<MyNameWidget> {
           ),
           TextButton(
             onPressed: () {
-              _showEditNameOverlay(context); // Показать оверлей
+              _showEditNameOverlay(context);
             },
             child: const Text(
               'Изменить',

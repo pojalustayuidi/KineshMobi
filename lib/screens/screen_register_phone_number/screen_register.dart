@@ -1,6 +1,6 @@
 import 'package:KineshmaApp/screens/screen_register_phone_number/screen_widget/iconlogo.dart';
 import 'package:KineshmaApp/screens/screen_register_phone_number/screen_widget/rectangler.dart';
-import 'package:KineshmaApp/screens/screen_register_profile/screen_register.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/screen_register_info.dart';
 import 'package:KineshmaApp/services/auth_service.dart';
 
 import 'package:flutter/material.dart';

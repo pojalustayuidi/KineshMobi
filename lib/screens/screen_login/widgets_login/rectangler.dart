@@ -30,13 +30,11 @@ class RectangleLogin extends StatelessWidget {
         color: Color(0xFFDADADA),
         width: screenWidth * 0.90,
         padding: EdgeInsets.all(padding),
-        // Внутренние отступы внутри контейнера
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          // Контейнер подстраивается под содержимое
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextLogin(), // Ваш виджет TextUp
+            TextLogin(),
             SizedBox(height: 8),
             Text(
               "Введите ваш логин и пароль, если вы уже регистрировались",

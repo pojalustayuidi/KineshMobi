@@ -1,14 +1,16 @@
 import 'package:KineshmaApp/screens/navigation_menu_bnb.dart';
-import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/text_widgetl.dart';
-import 'package:KineshmaApp/screens/screen_register_profile/screen_RegisterInfoWidget/textfirstnamew.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/widgets_screen_register_Info/firstnameform.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/widgets_screen_register_Info/genderwidget.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/widgets_screen_register_Info/isreadybutton.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/widgets_screen_register_Info/lastnameForm.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/widgets_screen_register_Info/textfirstnamew.dart';
+import 'package:KineshmaApp/screens/screen_register_profile/widgets_screen_register_Info/textlastname.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'screen_RegisterInfoWidget/firstnameform.dart';
-import 'screen_RegisterInfoWidget/genderwidget.dart';
-import 'screen_RegisterInfoWidget/isreadybutton.dart';
-import 'screen_RegisterInfoWidget/lastnameForm.dart';
-import 'screen_RegisterInfoWidget/textlastname.dart';
+import 'widgets_screen_register_Info/text_widgetl.dart';
+
+
 
 class ScreenRegisterInfo extends StatefulWidget {
   final String username;
@@ -25,16 +27,18 @@ class ScreenRegisterInfoUI extends StatelessWidget {
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
   final TextEditingController userNameController;
-  final String gender;
+  final String? selectedGender;
+  final ValueChanged<String?> onGenderChanged;
   final VoidCallback onSave;
 
   const ScreenRegisterInfoUI(
       {super.key,
       required this.firstNameController,
       required this.lastNameController,
-      required this.gender,
       required this.onSave,
-      required this.userNameController});
+      required this.userNameController,
+      this.selectedGender,
+      required this.onGenderChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +74,10 @@ class ScreenRegisterInfoUI extends StatelessWidget {
         SizedBox(
           height: 6,
         ),
-        Gender(),
+        Gender(
+          initialGender: selectedGender,
+          onGenderChanged: onGenderChanged,
+        ),
         SizedBox(
           height: 32,
         ),
@@ -86,7 +93,7 @@ class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
   final TextEditingController _firtstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
-  final String _selectedGender = 'Не указан';
+  String _selectedGender = 'Не указан';
 
   Future<void> _savetoFirebase() async {
     if (_firtstNameController.text.isEmpty ||
@@ -110,7 +117,6 @@ class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
           MaterialPageRoute(
             builder: (context) => MainNavigationWrapper(
               userName: widget.username,
-
             ),
           ));
       ScaffoldMessenger.of(context)
@@ -134,8 +140,14 @@ class _ScreenRegisterInfoState extends State<ScreenRegisterInfo> {
       body: ScreenRegisterInfoUI(
         firstNameController: _firtstNameController,
         lastNameController: _lastNameController,
-        gender: _selectedGender,
-        onSave: _savetoFirebase, userNameController: _userNameController,
+        selectedGender: _selectedGender,
+        onSave: _savetoFirebase,
+        userNameController: _userNameController,
+        onGenderChanged: (newGender) {
+          setState(() {
+            _selectedGender = newGender ?? 'Не указан';
+          });
+        },
       ),
       appBar: AppBar(),
     );

@@ -23,7 +23,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
 
   Future<void> _sendVerificationCode() async {
     setState(() => _isLoading = true);
-    if (_usernameController.text.isEmpty) {
+    final username = _usernameController.text.trim();
+    final password = _passwordController.text.trim();
+    if (_usernameController.text.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Введите Логин и пароль"),
@@ -51,16 +53,15 @@ class _ScreenLoginState extends State<ScreenLogin> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MainNavigationWrapper(
-                firstName: firstName,
-                lastName: lastName, userName: _usernameController.text
-              ),
+              builder: (context) =>
+                  MainNavigationWrapper(userName: _usernameController.text),
             ),
           );
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('Вход совершен успешно')));
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Неверный логин или пароль')));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Неверный логин или пароль')));
         }
       }
     } catch (e) {
@@ -70,36 +71,40 @@ class _ScreenLoginState extends State<ScreenLogin> {
       setState(() => _isLoading = false);
     }
   }
+
   @override
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 40,
-            ),
-            IconsLogo(),
-            RectangleLogin(
-              usernameController: _usernameController,
-              passwordController: _passwordController,
-              onSubmit: _sendVerificationCode,
-              isLoading: _isLoading,
-            ),
-            Spacer(
-              flex: 1,
-            ),
-            TextDontHaveAccount(),
-            SizedBox(
-              height: 40,
-            )
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 40,
+              ),
+              IconsLogo(),
+              RectangleLogin(
+                usernameController: _usernameController,
+                passwordController: _passwordController,
+                onSubmit: _sendVerificationCode,
+                isLoading: _isLoading,
+              ),
+              Spacer(
+                flex: 1,
+              ),
+              TextDontHaveAccount(),
+              SizedBox(
+                height: 40,
+              )
+            ],
+          ),
         ),
       ),
     );

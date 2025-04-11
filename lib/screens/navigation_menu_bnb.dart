@@ -12,8 +12,7 @@ class MainNavigationWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (userName.isEmpty){
-    }
+    if (userName.isEmpty) {}
     return StreamBuilder<DocumentSnapshot>(
       stream: FirebaseFirestore.instance
           .collection('users')
@@ -64,9 +63,10 @@ class _MainNavigationContentState extends State<MainNavigationContent> {
     _screens = [
       ScreenHomeContent(userName: widget.userName),
       const ScreenSavedRasp(),
-      ScreenMap(userName: widget.userName,),
-      ScreenSettings(
-          userName: widget.userName),
+      ScreenMap(
+        userName: widget.userName,
+      ),
+      ScreenSettings(userName: widget.userName),
     ];
   }
 
@@ -81,8 +81,8 @@ class _MainNavigationContentState extends State<MainNavigationContent> {
           BottomNavigationBarItem(
               icon: Icon(Icons.directions_bus), label: 'Маршруты'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Избранное'),
-          BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Карта'),
+              icon: Icon(Icons.favorite_border_outlined), label: 'Избранное'),
+          BottomNavigationBarItem(icon: Icon(Icons.map_sharp), label: 'Карта'),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Настройки'),
         ],

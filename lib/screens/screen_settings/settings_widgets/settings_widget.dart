@@ -48,14 +48,15 @@ class SettingsWidget extends StatelessWidget {
         ),
         Divider(),
         TextButton(
-            onPressed: () {},
+            onPressed: () {Navigator.of(context).pushNamed('/language');},
             child: Text(
               'Язык',
               style: TextStyle(color: Color(0xFF344E41)),
             )),
         Divider(),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+          },
           child: Text(
             'Уведомления',
             style: TextStyle(

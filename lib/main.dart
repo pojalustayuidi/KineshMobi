@@ -20,8 +20,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: AppRoutes.routes,
       initialRoute: '/',
-      // supportedLocales: const [Locale('ru', 'RU'),Locale('en', 'EN')],
-      // locale: const Locale('ru', 'RU'),
     );
   }
 }
