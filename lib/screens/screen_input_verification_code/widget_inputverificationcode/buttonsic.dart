@@ -2,8 +2,6 @@ import 'package:KineshmaApp/adaptive_design/adaptivedesign_widget.dart';
 import 'package:flutter/material.dart';
 
 
-// import 'Dialog/dialog_already_registred.dart';
-
 class ButtonSec extends StatelessWidget {
   final VoidCallback onPressed;
   const ButtonSec({super.key, required this.onPressed});

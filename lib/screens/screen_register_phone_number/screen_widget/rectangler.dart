@@ -2,8 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'continuebutton.dart';
 import 'textphone.dart';
-import 'email_form_field.dart'; // Предполагаю, что это ваш файл с EmailForm
-
+import 'email_form_field.dart';
 class Rectangle extends StatelessWidget {
   final TextEditingController usernameController;
   final TextEditingController passwordController;
@@ -29,12 +28,12 @@ class Rectangle extends StatelessWidget {
       child: Container(
         color: Color(0xFFDADADA),
         width: screenWidth * 0.90,
-        padding: EdgeInsets.all(padding), // Внутренние отступы внутри контейнера
+        padding: EdgeInsets.all(padding),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // Контейнер подстраивается под содержимое
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextUp(), // Ваш виджет TextUp
+            TextUp(),
             SizedBox(height: 8),
             Text(
               "Придумайте Логин и пароль",

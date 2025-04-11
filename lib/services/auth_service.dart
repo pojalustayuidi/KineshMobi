@@ -17,7 +17,7 @@ class AuthService {
 
     final userDoc = await _firestore.collection('users').doc(username).get();
     if (userDoc.exists) {
-      throw Exception('Пользователь с таким username уже существует');
+      throw Exception('Пользователь с таким логином уже существует');
     }
 
     await _firestore.collection('users').doc(username).set({

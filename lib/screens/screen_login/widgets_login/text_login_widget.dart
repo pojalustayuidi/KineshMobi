@@ -38,12 +38,14 @@ class TextLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Text(
-          'Вход',
-          style: TextStyle(
-              color: Color(0xFF2E6659),
-              fontSize: 36,
-              fontWeight: FontWeight.w700),
+        Center(
+          child: Text(
+            'Вход',
+            style: TextStyle(
+                color: Color(0xFF2E6659),
+                fontSize: 36,
+                fontWeight: FontWeight.w700),
+          ),
         )
       ],
     );

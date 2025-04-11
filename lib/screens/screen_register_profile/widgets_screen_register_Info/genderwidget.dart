@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Gender extends StatefulWidget {
-  const Gender({super.key});
+  final String? initialGender;
+  final ValueChanged<String?> onGenderChanged;
+
+  const Gender({super.key, this.initialGender, required this.onGenderChanged});
 
   @override
   State<Gender> createState() => _GenderState();
@@ -9,7 +12,11 @@ class Gender extends StatefulWidget {
 
 class _GenderState extends State<Gender> {
   String? _selectedGender;
-
+@override
+  void initState(){
+super.initState();
+_selectedGender = widget.initialGender;
+}
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,6 +41,7 @@ class _GenderState extends State<Gender> {
                 onChanged: (String? value) {
                   setState(() {
                     _selectedGender = value;
+                    widget.onGenderChanged(value);
                   });
                 }),
             const Text("Мужской"),
@@ -43,6 +51,7 @@ class _GenderState extends State<Gender> {
                 onChanged: (String? value) {
                   setState(() {
                     _selectedGender = value;
+                    widget.onGenderChanged(value);
                   });
                 }),
             const Text('Женский')
