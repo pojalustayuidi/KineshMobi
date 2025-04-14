@@ -17,7 +17,7 @@ class _ScreenSavedRasp extends State<ScreenSavedRasp> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [WelcomeText(lastName: '', firstName: '',)],
+          children: [WelcomeText()],
         ),
       ));
   }}

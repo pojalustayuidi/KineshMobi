@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 class WelcomeText extends StatelessWidget {
-  final String firstName;
-  final String lastName;
 
   const WelcomeText(
-      {super.key, required this.firstName, required this.lastName});
+      {super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class WelcomeText extends StatelessWidget {
             ),
             SizedBox(height: 4),
             Text(
-              '$lastName, $firstName',
+              'Ты крутой!',
               style: TextStyle(
                   color: Color(0xFF344E41),
                   fontSize: 16,
