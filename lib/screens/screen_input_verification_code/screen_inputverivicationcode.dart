@@ -1,6 +1,6 @@
 import 'package:KineshmaApp/screens/screen_input_verification_code/widget_inputverificationcode/buttonsic.dart';
 import 'package:KineshmaApp/screens/screen_input_verification_code/widget_inputverificationcode/text_inputverificationcode.dart';
-import 'package:KineshmaApp/services/email_verification_service.dart';
+import 'package:KineshmaApp/services/firebase_service/email_verification_service.dart';
 import 'package:flutter/material.dart';
 
 import 'widget_inputverificationcode/code_form.dart';
