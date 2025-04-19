@@ -28,7 +28,8 @@
 
 
 
-[![Демонстрация приложения](https://img.youtube.com/vi/CqOgqNgTT30/0.jpg)](https://www.youtube.com/watch?v=CqOgqNgTT30)
+[![Итоговое видео: Текущая версия приложения](https://img.youtube.com/vi/CqOgqNgTT30/0.jpg)](https://www.youtube.com/watch?v=CqOgqNgTT30)
+[![Видео: Экраны регистрации и входа](https://img.youtube.com/vi/2WZKiYzL9ic/0.jpg)](https://www.youtube.com/watch?v=2WZKiYzL9ic)
 
 [![Демонстрация экрана входа и регистрации](https://img.youtube.com/vi/CqOgqNgTT30/0.jpg)](https://www.youtube.com/watch?v=CqOgqNgTT30)
 ## Дизайн приложения
