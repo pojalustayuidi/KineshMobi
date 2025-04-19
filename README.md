@@ -35,11 +35,14 @@
 [![Демонстрация экрана входа и регистрации](https://img.youtube.com/vi/CqOgqNgTT30/0.jpg)](https://www.youtube.com/watch?v=CqOgqNgTT30)
 ### [Дополнительные материалы (Яндекс.Диск)](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
 ## Дизайн приложения
+Перед началом разработки я самостоятельно создал прототип дизайна в Figma, чтобы визуализировать интерфейс приложения и продумать пользовательский опыт. Самостоятельное создание логотипа и придумывания названия.
 
 
-
-
-
+### Итоговый дизайн 
+[![Видео: Прототип дизайна в Figma](https://img.youtube.com/vi/Scc7TpWkRD0/0.jpg)](https://www.youtube.com/watch?v=Scc7TpWkRD0)
+### Figma
+[![Figma Design KineshMobi](https://www.figma.com/design/BnfHzwWtoBNlHtyQs0cod4/KineshmaMobi?node-id=0-1&t=NCSJkJbsAseOPV4I-1)
+[Яндекс диск ](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
 ## Архитектура проекта
 - **lib/routes** — папка с маршрутизацией проекта 
 - **lib/mainWidget** — папка с виджетами которые часто используются на экранах
