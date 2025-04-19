@@ -25,7 +25,7 @@
 Списка маршрутов и расписания.
 Информации об остановках.
 Информация ближайшего автобуса.
-Yanedx Disk = https://disk.yandex.ru/d/SM3CKLH5KRYWNA
+Yanedx Disk = (https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
 ### Итоговое видео: Текущая версия приложения
 [![Итоговое видео: Текущая версия приложения](https://img.youtube.com/vi/CqOgqNgTT30/0.jpg)](https://www.youtube.com/watch?v=CqOgqNgTT30)
 
