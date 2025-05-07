@@ -1,14 +1,15 @@
+import 'package:KineshmaApp/screens/screen_language/widgets_language/radio_button_language.dart';
 import 'package:flutter/material.dart';
 
 class ChangeLanguageWidget extends StatelessWidget {
-  const ChangeLanguageWidget({super.key});
-
+  final String text;
+  const ChangeLanguageWidget({super.key,required this.text});
   @override
   Widget build(BuildContext context) {
-    return Column(
-     crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Русский (Russian)"),Divider()   ],
+        Text(text, style: TextStyle(fontWeight: FontWeight.w500,)), ],
     );
   }
 }
