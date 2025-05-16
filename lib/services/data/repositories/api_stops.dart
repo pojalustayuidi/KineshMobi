@@ -1,8 +1,9 @@
 
 import 'package:dio/dio.dart';
 
-import 'models/route_destination.dart';
-import 'models/stop.dart';
+import '../models/route_destination.dart';
+import '../models/stop.dart';
+
 
 class ApiStops {
 

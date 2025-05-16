@@ -1,11 +1,11 @@
-import 'package:KineshmaApp/screens/screen_home/widgets_home/routes_color.dart';
-import 'package:KineshmaApp/screens/screen_home/widgets_home/text_home_page.dart';
-import 'package:KineshmaApp/services/data/api_stops.dart';
-import 'package:KineshmaApp/services/data/models/stop.dart';
 import 'package:flutter/material.dart';
-
+import 'package:KineshmaApp/screens/screen_home/widgets_home/routes_color.dart';
+import 'package:KineshmaApp/screens/screen_home/widgets_home/route_card.dart';
+import 'package:KineshmaApp/screens/screen_home/widgets_home/text_home_page.dart';
+import 'package:KineshmaApp/services/data/repositories/api_stops.dart';
+import 'package:KineshmaApp/services/data/models/stop.dart';
+import 'package:KineshmaApp/services/data/models/bus_station.dart';
 import '../utils_home/darken_color_utils.dart';
-import '../utils_home/time_utils.dart';
 
 class TextfieldStopinput extends StatefulWidget {
   final ApiStops apiStops;
@@ -20,11 +20,23 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
   final TextEditingController _controller = TextEditingController();
   List<Widget> _routeWidgets = [];
 
+  // Вспомогательная функция для получения ближайшего времени прибытия
+  String _getNextArrivalTime(List<String> arrivalTimes) {
+    final now = DateTime.now();
+    final currentTime = '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+
+    final sortedTimes = arrivalTimes..sort();
+    for (final time in sortedTimes) {
+      if (time.compareTo(currentTime) >= 0) {
+        return time;
+      }
+    }
+    return '23:59';
+  }
+
   void _searchRoute(String query) async {
     if (query.isEmpty) {
-      setState(() {
-        _routeWidgets = [];
-      });
+      setState(() => _routeWidgets = []);
       return;
     }
 
@@ -35,158 +47,52 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
     );
 
     if (matchingStop.id == -1) {
-      setState(() {
-        _routeWidgets = [const Text('Остановка не найдена')];
-      });
+      setState(() => _routeWidgets = [const Text('Остановка не найдена')]);
       return;
     }
 
     final routes = await widget.apiStops.getRoutesByStop(matchingStop.id);
     if (routes.isEmpty) {
-      setState(() {
-        _routeWidgets = [const Text('Маршруты не найдены')];
-      });
+      setState(() => _routeWidgets = [const Text('Маршруты не найдены')]);
       return;
     }
 
-    final routeWidgets = <Widget>[];
+    // Общий список для всех маршрутов
+    final allCards = <Map<String, dynamic>>[];
 
     for (final route in routes) {
       final baseColor = routeColors[route.routeShortName] ?? Colors.grey;
 
-      if (route.forward.any((station) => station.stopId == matchingStop.id)) {
-        final stopIndex = route.forward.indexWhere((station) => station.stopId == matchingStop.id);
-        final stop = route.forward[stopIndex];
-        final nextStop = stopIndex + 1 < route.forward.length
-            ? route.forward[stopIndex + 1].name
-            : 'Конец маршрута';
-        final start = stop.name;
-        final end = route.forward.last.name;
-
-        final nextTime = findNextArrivalTime(stop.arrivalTimes) ?? 'Нет ближайших автобусов';
-
-        routeWidgets.add(
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: baseColor,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(
-                    route.routeShortName,
-                    style: const TextStyle(
-                      color: Color(0xFF4F378A),
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '$start -> $nextStop -> $end',
-                        style: const TextStyle(
-                          color: Color(0xFF1D1B20),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        'Ближайший автобус: $nextTime',
-                        style: const TextStyle(
-                          color: Color(0xFF667085),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      const Divider(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
+      void addDirection(List<BusStation> direction, Color color) {
+        final index = direction.indexWhere((s) => s.stopId == matchingStop.id);
+        if (index != -1) {
+          final nextArrival = _getNextArrivalTime(direction[index].arrivalTimes);
+          allCards.add({
+            'route': route,
+            'direction': direction,
+            'color': color,
+            'stopId': matchingStop.id,
+            'nextArrival': nextArrival,
+          });
+        }
       }
 
-      if (route.backward.any((station) => station.stopId == matchingStop.id)) {
-        final stopIndex = route.backward.indexWhere((station) => station.stopId == matchingStop.id);
-        final stop = route.backward[stopIndex];
-        final nextStop = stopIndex - 1 >= 0
-            ? route.backward[stopIndex - 1].name
-            : 'Конец маршрута';
-        final start = stop.name;
-        final end = route.backward.first.name;
-
-        final nextTime = findNextArrivalTime(stop.arrivalTimes) ?? 'Нет ближайших автобусов';
-        final backwardColor = darkenColor(baseColor);
-
-        routeWidgets.add(
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: backwardColor,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(
-                    route.routeShortName,
-                    style: const TextStyle(
-                      color: Color(0xFF4F378A),
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '$start -> $nextStop -> $end',
-                        style: const TextStyle(
-                          color: Color(0xFF1D1B20),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        'Ближайший автобус: $nextTime',
-                        style: const TextStyle(
-                          color: Color(0xFF667085),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      const Divider(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      }
+      addDirection(route.forward, baseColor);
+      addDirection(route.backward, darkenColor(baseColor));
     }
 
-    setState(() {
-      _routeWidgets = routeWidgets.isNotEmpty
-          ? routeWidgets
-          : [const Text('Маршруты не найдены')];
-    });
+    // Сортировка по ближайшему времени прибытия
+    allCards.sort((a, b) => a['nextArrival'].compareTo(b['nextArrival']));
+
+    // Формируем виджеты
+    final widgets = allCards.map<Widget>((card) => RouteCard(
+      route: card['route'],
+      direction: card['direction'],
+      color: card['color'],
+      stopId: card['stopId'],
+    )).toList();
+
+    setState(() => _routeWidgets = widgets.isNotEmpty ? widgets : [const Text('Маршруты не найдены')]);
   }
 
   @override
@@ -201,7 +107,6 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
             controller: _controller,
             decoration: const InputDecoration(
               hintText: 'Ваша остановка',
-              hintStyle: TextStyle(color: Colors.grey),
               labelText: 'Введите остановку',
               border: OutlineInputBorder(),
             ),

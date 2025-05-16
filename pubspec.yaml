@@ -30,12 +30,9 @@ dependencies:
   intl_phone_field: ^3.2.0
   flutter_otp_text_field: ^1.2.0
   auto_route: ^10.0.1
-  firebase_auth: ^5.4.2
-  cloud_firestore: ^5.6.3
   firebase_messaging: ^15.2.2
   flutterfire_cli: ^1.0.1
   firebase_core: ^3.11.0
-  cloud_functions: ^5.4.0
   crypto: ^3.0.6
   dio: ^5.8.0+1
 
@@ -91,6 +88,12 @@ flutter:
          - asset: assets/fonts/TTSmalls-SemiBold.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
 #           weight: 700
+     - family: Century_Gothic
+       fonts:
+         - asset: assets/fonts/Century_Gothic.ttf
+     - family: Franklin_Gothic_Medium
+       fonts:
+         - asset: assets/fonts/Franklin_Gothic_Medium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

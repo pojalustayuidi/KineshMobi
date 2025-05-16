@@ -1,4 +1,3 @@
-import 'package:KineshmaApp/screens/screen_account/widget_account/my_gender_widget.dart';
 import 'package:KineshmaApp/screens/screen_account/widget_account/my_name_widget.dart';
 import 'package:KineshmaApp/screens/screen_account/widget_account/my_password_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class _ScreenAccountState extends State<ScreenAccount> {
             height: 10,
           ),
           Divider(),
-          MyGenderWidget(gender: '', userId: '',),
+          // MyGenderWidget(gender: '', userId: '',),
           SizedBox(
             height: 10,
           ),
