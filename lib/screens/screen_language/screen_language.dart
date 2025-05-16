@@ -1,4 +1,5 @@
 import 'package:KineshmaApp/screens/screen_language/widgets_language/change_language_widget.dart';
+import 'package:KineshmaApp/screens/screen_language/widgets_language/radio_button_language.dart';
 import 'package:flutter/material.dart';
 
 class ScreenLanguage extends StatelessWidget {
@@ -11,7 +12,7 @@ class ScreenLanguage extends StatelessWidget {
         appBar: AppBar(title: Text('Настройки',style: TextStyle(color: Color(0xFF344E41)),),),
         body: Column(
           children: [SizedBox(height: 50,),
-            ChangeLanguageWidget(),],
+            ChangeLanguageWidget(text: 'Русский (Russian)',), Divider(), ],
         ),
       ),
     );

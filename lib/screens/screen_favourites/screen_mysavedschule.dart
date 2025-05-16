@@ -1,4 +1,4 @@
-import 'package:KineshmaApp/screens/screen_home/widgets_home/welcome_text_widget.dart';
+import 'package:KineshmaApp/screens/screen_home/widgets_home/text_home_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -17,7 +17,7 @@ class _ScreenSavedRasp extends State<ScreenSavedRasp> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [WelcomeText(lastName: '', firstName: '',)],
+          children: [TextHomePage()],
         ),
       ));
   }}

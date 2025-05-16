@@ -2,7 +2,6 @@ import 'package:KineshmaApp/screens/screen_Home/screen_home.dart';
 import 'package:KineshmaApp/screens/screen_favourites/screen_mysavedschule.dart';
 import 'package:KineshmaApp/screens/screen_map/screen_map.dart';
 import 'package:KineshmaApp/screens/screen_settings/screen_settings.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MainNavigationWrapper extends StatelessWidget {
@@ -12,41 +11,18 @@ class MainNavigationWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (userName.isEmpty) {}
-    return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('users')
-          .doc(userName)
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (!snapshot.hasData || !snapshot.data!.exists) {
-          return const Center(child: Text('Пользователь не найден'));
-        }
 
-        final data = snapshot.data!.data() as Map<String, dynamic>;
-        String firstName = data['firstName'] ?? userName;
-        String lastName = data['lastName'] ?? '';
 
         return MainNavigationContent(
-            firstName: firstName, lastName: lastName, userName: userName);
-      },
     );
   }
 }
 
 class MainNavigationContent extends StatefulWidget {
-  final String firstName;
-  final String lastName;
-  final String userName;
+
 
   const MainNavigationContent({
     super.key,
-    required this.firstName,
-    required this.lastName,
-    required this.userName,
   });
 
   @override
@@ -61,12 +37,11 @@ class _MainNavigationContentState extends State<MainNavigationContent> {
   void initState() {
     super.initState();
     _screens = [
-      ScreenHomeContent(userName: widget.userName),
+      ScreenHomeContent(),
       const ScreenSavedRasp(),
       ScreenMap(
-        userName: widget.userName,
       ),
-      ScreenSettings(userName: widget.userName),
+      ScreenSettings(),
     ];
   }
 
