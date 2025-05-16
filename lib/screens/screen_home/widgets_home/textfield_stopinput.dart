@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/routes_color.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/route_card.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/text_home_page.dart';
+import 'package:KineshmaApp/screens/screen_home/widgets_home/stop_dropdown.dart';
 import 'package:KineshmaApp/services/data/repositories/api_stops.dart';
 import 'package:KineshmaApp/services/data/models/stop.dart';
 import 'package:KineshmaApp/services/data/models/bus_station.dart';
@@ -17,10 +18,25 @@ class TextfieldStopinput extends StatefulWidget {
 }
 
 class _TextfieldStopinputState extends State<TextfieldStopinput> {
-  final TextEditingController _controller = TextEditingController();
   List<Widget> _routeWidgets = [];
+  List<Stop> _allStops = [];
+  Stop? _selectedStop;
 
-  // Вспомогательная функция для получения ближайшего времени прибытия
+  @override
+  void initState() {
+    super.initState();
+    _loadStops();
+  }
+
+  // Load all stops when the widget is initialized
+  Future<void> _loadStops() async {
+    final stops = await widget.apiStops.getStopsList();
+    setState(() {
+      _allStops = stops;
+    });
+  }
+
+  // Helper function to get the next arrival time
   String _getNextArrivalTime(List<String> arrivalTimes) {
     final now = DateTime.now();
     final currentTime = '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
@@ -34,44 +50,38 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
     return '23:59';
   }
 
-  void _searchRoute(String query) async {
-    if (query.isEmpty) {
-      setState(() => _routeWidgets = []);
-      return;
-    }
+  // Search routes based on the selected or entered stop
+  void _searchRoute(Stop? selectedStop) async {
+    setState(() {
+      _selectedStop = selectedStop;
+    });
 
-    final stops = await widget.apiStops.getStopsList();
-    final matchingStop = stops.firstWhere(
-          (stop) => stop.name.toLowerCase() == query.toLowerCase(),
-      orElse: () => Stop(name: '', id: -1),
-    );
-
-    if (matchingStop.id == -1) {
+    if (selectedStop == null || selectedStop.id == -1) {
       setState(() => _routeWidgets = [const Text('Остановка не найдена')]);
       return;
     }
 
-    final routes = await widget.apiStops.getRoutesByStop(matchingStop.id);
+    final routes = await widget.apiStops.getRoutesByStop(selectedStop.id);
     if (routes.isEmpty) {
       setState(() => _routeWidgets = [const Text('Маршруты не найдены')]);
       return;
     }
 
-    // Общий список для всех маршрутов
+    // List to hold all route cards
     final allCards = <Map<String, dynamic>>[];
 
     for (final route in routes) {
       final baseColor = routeColors[route.routeShortName] ?? Colors.grey;
 
       void addDirection(List<BusStation> direction, Color color) {
-        final index = direction.indexWhere((s) => s.stopId == matchingStop.id);
+        final index = direction.indexWhere((s) => s.stopId == selectedStop.id);
         if (index != -1) {
           final nextArrival = _getNextArrivalTime(direction[index].arrivalTimes);
           allCards.add({
             'route': route,
             'direction': direction,
             'color': color,
-            'stopId': matchingStop.id,
+            'stopId': selectedStop.id,
             'nextArrival': nextArrival,
           });
         }
@@ -81,10 +91,10 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
       addDirection(route.backward, darkenColor(baseColor));
     }
 
-    // Сортировка по ближайшему времени прибытия
+    // Sort by next arrival time
     allCards.sort((a, b) => a['nextArrival'].compareTo(b['nextArrival']));
 
-    // Формируем виджеты
+    // Create widgets
     final widgets = allCards.map<Widget>((card) => RouteCard(
       route: card['route'],
       direction: card['direction'],
@@ -98,26 +108,21 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
-    return Column(
+return GestureDetector(
+  onTap: (){FocusScope.of(context).unfocus();},
+     child:  Column(
       children: [
-        SizedBox(
+        StopDropdown(
+          stops: _allStops,
+          selectedStop: _selectedStop,
+          onChanged: _searchRoute,
           width: screenWidth * 0.85,
-          child: TextField(
-            controller: _controller,
-            decoration: const InputDecoration(
-              hintText: 'Ваша остановка',
-              labelText: 'Введите остановку',
-              border: OutlineInputBorder(),
-            ),
-            onChanged: _searchRoute,
-          ),
         ),
         const SizedBox(height: 50),
         const TextMarshrut(),
         const SizedBox(height: 10),
         Column(children: _routeWidgets),
       ],
-    );
+    ),);
   }
 }

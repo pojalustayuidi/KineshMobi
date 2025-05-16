@@ -1,150 +1,108 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-//
-// import '../../../models/stop.dart';
-//
-// class StopDropdown extends StatefulWidget {
-//   final List<Stop> stops;
-//   final Function(Stop?) onStopSelected;
-//
-//   const StopDropdown({
-//     super.key,
-//     required this.stops,
-//     required this.onStopSelected,
-//   });
-//
-//   @override
-//   State<StopDropdown> createState() => _StopDropdownState();
-// }
-//
-// class _StopDropdownState extends State<StopDropdown> {
-//   String _searchQuery = '';
-//   final TextEditingController _textController = TextEditingController();
-//   OverlayEntry? _overlayEntry;
-//   final LayerLink _layerLink = LayerLink();
-//   final FocusNode _focusNode = FocusNode();
-//   Stop? _selectedStop;
-//
-//   @override
-//   void dispose() {
-//     _textController.dispose();
-//     _focusNode.dispose();
-//     _overlayEntry?.remove();
-//     super.dispose();
-//   }
-//
-//   void _onSearchChanged(String query) {
-//     setState(() {
-//       _searchQuery = query;
-//     });
-//     if (query.isNotEmpty) {
-//       final matchingStop = widget.stops.firstWhere(
-//             (stop) => stop.name.toLowerCase().startsWith(query.toLowerCase()),
-//         orElse: () => Stop(id: -1, name: "Не найдено"),
-//       );
-//       if (matchingStop.id != -1) {
-//         _selectedStop = matchingStop;
-//         widget.onStopSelected(matchingStop);
-//       } else {
-//         _selectedStop = null;
-//         widget.onStopSelected(null);
-//       }
-//     } else {
-//       _selectedStop = null;
-//       widget.onStopSelected(null);
-//     }
-//   }
-//
-//   void _showDropdown(BuildContext context) {
-//     _overlayEntry?.remove();
-//     _overlayEntry = _createOverlayEntry();
-//     Overlay.of(context).insert(_overlayEntry!);
-//     _focusNode.requestFocus();
-//   }
-//
-//   OverlayEntry _createOverlayEntry() {
-//     final filteredStops = _searchQuery.isEmpty
-//         ? widget.stops
-//         : widget.stops
-//         .where((stop) =>
-//         stop.name.toLowerCase().startsWith(_searchQuery.toLowerCase()))
-//         .toList();
-//
-//     return OverlayEntry(
-//       builder: (context) => Positioned(
-//         width: MediaQuery.of(context).size.width - 32, // Ширина TextField
-//         child: CompositedTransformFollower(
-//           link: _layerLink,
-//           showWhenUnlinked: false,
-//           offset: const Offset(0, 56), // Смещение вниз от TextField
-//           child: Material(
-//             elevation: 4.0,
-//             borderRadius: BorderRadius.circular(4.0),
-//             child: Container(
-//               constraints: const BoxConstraints(maxHeight: 200),
-//               decoration: BoxDecoration(
-//                 color: Colors.white,
-//                 border: Border.all(color: Colors.grey, width: 1.0),
-//                 borderRadius: BorderRadius.circular(4.0),
-//               ),
-//               child: filteredStops.isEmpty
-//                   ? const Padding(
-//                 padding: EdgeInsets.all(8.0),
-//                 child: Text('Нет подходящих остановок'),
-//               )
-//                   : ListView.builder(
-//                 shrinkWrap: true,
-//                 itemCount: filteredStops.length,
-//                 itemBuilder: (context, index) {
-//                   final stop = filteredStops[index];
-//                   return ListTile(
-//                     title: Text(stop.name),
-//                     onTap: () {
-//                       setState(() {
-//                         _searchQuery = stop.name;
-//                         _textController.text = stop.name;
-//                         _selectedStop = stop;
-//                       });
-//                       widget.onStopSelected(stop);
-//                       _overlayEntry?.remove();
-//                       _overlayEntry = null;
-//                     },
-//                   );
-//                 },
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return CompositedTransformTarget(
-//       link: _layerLink,
-//       child: TextField(
-//         controller: _textController,
-//         focusNode: _focusNode,
-//         onChanged: _onSearchChanged,
-//         decoration: InputDecoration(
-//           labelText: 'Введите остановку или выберите',
-//           labelStyle: const TextStyle(color: Colors.grey),
-//           border: const OutlineInputBorder(
-//             borderSide: BorderSide(color: Colors.grey, width: 1),
-//           ),
-//           enabledBorder: const OutlineInputBorder(
-//             borderSide: BorderSide(color: Colors.grey, width: 1),
-//           ),
-//           focusedBorder: const OutlineInputBorder(
-//             borderSide: BorderSide(color: Colors.blue, width: 1),
-//           ),
-//           suffixIcon: IconButton(
-//             icon: const Icon(Icons.arrow_downward, color: Colors.black),
-//             onPressed: () => _showDropdown(context),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:KineshmaApp/services/data/models/stop.dart';
+
+class StopDropdown extends StatefulWidget {
+  final List<Stop> stops;
+  final Stop? selectedStop;
+  final ValueChanged<Stop?> onChanged;
+  final double width;
+
+  const StopDropdown({
+    super.key,
+    required this.stops,
+    required this.selectedStop,
+    required this.onChanged,
+    required this.width,
+  });
+
+  @override
+  State<StopDropdown> createState() => _StopDropdownState();
+}
+
+class _StopDropdownState extends State<StopDropdown> {
+  bool _isDropdownRequested = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widget.width,
+      child: Autocomplete<Stop>(
+        optionsBuilder: (TextEditingValue textEditingValue) {
+          if (textEditingValue.text.isEmpty && !_isDropdownRequested) {
+            return const Iterable<Stop>.empty();
+          }
+          return widget.stops.where((Stop stop) {
+            return textEditingValue.text.isEmpty ||
+                stop.name.toLowerCase().contains(textEditingValue.text.toLowerCase());
+          });
+        },
+        displayStringForOption: (Stop stop) => stop.name,
+        onSelected: (Stop stop) {
+          FocusScope.of(context).unfocus();
+          widget.onChanged(stop);
+          setState(() {
+            _isDropdownRequested = false;
+          });
+        },
+        fieldViewBuilder: (BuildContext context, TextEditingController controller,
+            FocusNode focusNode, VoidCallback onFieldSubmitted) {
+          if (widget.selectedStop != null && controller.text.isEmpty) {
+            controller.text = widget.selectedStop!.name;
+          }
+          return TextFormField(
+            controller: controller,
+            focusNode: focusNode,
+            decoration: InputDecoration(
+              labelText: 'Выберите остановку',
+              hintText: 'Ваша остановка',
+              border: const OutlineInputBorder(),
+              suffixIcon: controller.text.isNotEmpty
+                  ? IconButton(
+                icon: const Icon(Icons.clear),
+                onPressed: () {
+                  controller.clear();
+                  widget.onChanged(null);
+                  setState(() {
+                    _isDropdownRequested = false;
+                  });
+                },
+              )
+                  : IconButton(
+                icon: Icon(
+                  _isDropdownRequested
+                      ? Icons.arrow_drop_up
+                      : Icons.arrow_drop_down,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isDropdownRequested = !_isDropdownRequested;
+                  });
+                  if (_isDropdownRequested) {
+                    focusNode.requestFocus();
+                  } else {
+                    FocusScope.of(context).unfocus();
+                  }
+                },
+              ),
+            ),
+            onFieldSubmitted: (_) => onFieldSubmitted(),
+            onChanged: (value) {
+              if (value.isEmpty) {
+                widget.onChanged(null);
+                setState(() {
+                  _isDropdownRequested = false;
+                });
+              } else {
+                final matchingStop = widget.stops.firstWhere(
+                      (stop) => stop.name.toLowerCase() == value.toLowerCase(),
+                  orElse: () => Stop(name: value, id: -1),
+                );
+                widget.onChanged(matchingStop);
+              }
+            },
+          );
+        },
+      ),
+    );
+  }
+}
