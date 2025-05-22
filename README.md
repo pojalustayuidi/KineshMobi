@@ -33,7 +33,6 @@
 [![Видео: Экраны регистрации и входа](https://img.youtube.com/vi/2WZKiYzL9ic/0.jpg)](https://www.youtube.com/watch?v=2WZKiYzL9ic)
 ### Итоговое видео:  Версия приложения v0.1
 [![Демонстрация экрана входа и регистрации](https://img.youtube.com/vi/CqOgqNgTT30/0.jpg)](https://www.youtube.com/watch?v=CqOgqNgTT30)
-### [Дополнительные материалы (Яндекс.Диск)](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
 ## Дизайн приложения
 Перед началом разработки я самостоятельно создал прототип дизайна в Figma, чтобы визуализировать интерфейс приложения и продумать пользовательский опыт. Самостоятельное создание логотипа и придумывания названия.
 
@@ -41,10 +40,7 @@
 ### Итоговый дизайн 
 [![Видео: Прототип дизайна в Figma](https://img.youtube.com/vi/Scc7TpWkRD0/0.jpg)](https://www.youtube.com/watch?v=Scc7TpWkRD0)
 
-## Дополнительный материал
-### Figma
-[[Figma Design KineshMobi](https://www.figma.com/design/BnfHzwWtoBNlHtyQs0cod4/KineshmaMobi?node-id=0-1&t=NCSJkJbsAseOPV4I-1)
-#### [Яндекс диск ](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
+
 
 ### Дорожная карта
 - Добавить экрана с более подробным расписанием маршрута. (upd 20.04.2025) - Сдалено ✅
@@ -77,7 +73,10 @@ lib/
 │   ├──  screen_favorite/                      Папка экрана избранного маршрута 
 │        └── screen_mysavedschedule.dart       Экран избранных маршрутов
 ```
-
+## Дополнительный материал
+### Figma
+[Figma Design KineshMobi](https://www.figma.com/design/BnfHzwWtoBNlHtyQs0cod4/KineshmaMobi?node-id=0-1&t=NCSJkJbsAseOPV4I-1)
+#### [Яндекс диск ](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
 ## Developers
 
 - [pojalustayuidi](https://github.com/pojalustayuidi)
