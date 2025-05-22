@@ -40,9 +40,12 @@
 
 ### Итоговый дизайн 
 [![Видео: Прототип дизайна в Figma](https://img.youtube.com/vi/Scc7TpWkRD0/0.jpg)](https://www.youtube.com/watch?v=Scc7TpWkRD0)
+
+## Дополнительный материал
 ### Figma
 [[Figma Design KineshMobi](https://www.figma.com/design/BnfHzwWtoBNlHtyQs0cod4/KineshmaMobi?node-id=0-1&t=NCSJkJbsAseOPV4I-1)
 #### [Яндекс диск ](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
+
 ### Планы
 В дальнейшем я планирую:
 - Добавление взаимодействия с геолокациий, чтобы приложение считывало у пользователя геолокацию и находила ближайшую остановку. 
