@@ -57,54 +57,30 @@ https://youtu.be/Ci5NtzkHEME
 
 ## Архитектура проекта
 ```
-assets/                                 Ассеты: иконки, шрифты и другие ресурсы**
+assets/                                        Ассеты: иконки, шрифты и другие ресурсы**
 lib/
-├── routes/                             # Файлы маршрутизации
-├── main_widget/                        # Общие виджеты, используемые на разных экранах
-├── screens/                            # Экраны приложения
-│   ├── screen_register_phone_number/   # Экран регистрации по номеру, никнейм/пароль
-│   │                                   # ⚠️ Удалён на момент версии v0.2
-│   ├── screen_home/                    # Главный экран
-│   │   ├── screen_home.dart            # Основной файл главного экрана
-│   │   └── widgets_home/               # Виджеты главного экрана
-│   │       ├── route_card.dart         # Карточка маршрутов
-│   │       ├── route_color.dart        # Цвета маршрутов
-│   │       ├── stop_dropdown.dart      # Выпадающий список (логика)
-│   │       ├── text_home_page.dart     # Текстовые виджеты для главного экрана
-│   │       └── textfield_stopinput.dart# Текстовое поле ввода остановки (логика)
-│   └── screen_route_detail/           # Папка с Экранлом с деталями маршрута
-│       └── widgets_route_detail/       # Виджеты для экрана деталей маршрута
-        └── screen_route_detail.dart/   # Экран деталей маршрута + Логика  + Виджеты
-
+├── routes/                                    Файлы маршрутизации
+├── main_widget/                               Общие виджеты, используемые на разных экранах
+├── screens/                                   Экраны приложения
+│   ├── screen_register_phone_number/          Экран регистрации по номеру, никнейм/пароль
+│   │                                          ⚠️ Удалён на момент версии v0.2 ⚠️
+│   ├── screen_home/                           Главный экран
+│   │   ├── screen_home.dart                   Основной файл главного экрана
+│   │   └── widgets_home/                      Виджеты главного экрана
+│   │       ├── route_card.dart                Карточка маршрутов
+│   │       ├── route_color.dart               Цвета маршрутов
+│   │       ├── stop_dropdown.dart             Выпадающий список (логика)
+│   │       ├── text_home_page.dart            Текстовые виджеты для главного экрана
+│   │       └── textfield_stopinput.dart       Текстовое поле ввода остановки (логика)
+│   ├── screen_route_detail/                   Папка с Экранлом с деталями маршрута
+│   │   └── widgets_route_detail/              Виджеты для экрана деталей маршрута
+    │   └── screen_route_detail.dart/          Экран деталей маршрута + Логика  + Виджеты
+    │                         
+    │
+    ├──  screen_favorite/                      Папка экрана избранного маршрута 
+         └── screen_mysavedschedule.dart       Экран избранных маршрутов
 ```
 
-
-   ```lib/screens/screen_home/widgets_home/route_card.dart - карточка маршрутов
-   ```lib/screens/screen_home/widgets_home/route_color.dart - цвета кругов для маршуртов
-   - ``lib/screens/screen_home/widgets_home/stop_dropdown.dart`` - выпдающий список ( логика) 
-   - ``lib/screens/screen_home/widgets_home/text_home_page.dart`` - текстовые виджеты для экрана
-   - ``lib/screens/screen_home/widgets_home/textfield_stopinput.dart`` - текстовое поле, логика
-     - ``lib/screens/screen_route_detail/`` - папка с экраном
-        - ``lib/screens/screen_route_detail/widgets_route_detail`` - папка с виджетами этого экрана
-                  - ``lib/screens/screen_route_detail/widgets_route_detail`` - папка с виджетами этого экрана
-      
-        - ``lib/screens/screen_route_detail/screen_route_detail.dart`` - экран более подробного маршрута
-
-- **lib/screens/screen_InputVerificationCode** - папка с экраном  подтверждение SMS - кода
-   - **lib/screens/screen_InputVerificationCode/widget_inputverificationcode** - папка с виджетмами экрана потверждение SMS - Кода
-       - lib/screens/screen_InputVerificationCode/widget_inputverificationcode/buttonsic.dart - кнопка "Продолжить"
-       - lib/screens/screen_InputVerificationCode/widget_inputverificationcode/otptextfield.dart - Поле для ввода SMS - Кода
-       - lib/screens/screen_InputVerificationCode/widget_inputverificationcode/text_inputverificationcode.dart - Текстовые виджеты экрана Потверждения SMS - Кода
-- **lib/screens/screen_RegisterProfile** - папка с экраном  Регистрации нового пользователя
-  - **lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget** - папка с Виджетмами для экрана Регистрации нового пользователя
-    - lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget/emailform.dart - поле для ввода своего Email
-    - lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget/emailtext.dart - текстовый виджет
-    - lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget/firstnameform.dart - поле для ввода своего имени
-    - lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget/isreadybutton.dart - Кнопка продолжить
-    - lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget/lastnameForm.dart - Поле для ввода своей фамилии
-    - lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget/TextFill.dart - Текстовый виджет О себе
-    - lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget/textfirstname.dart - Текстовый виджет Имени
-    - lib/screens/screen_RegisterProfile/screen_RegisterInfoWidget/textlastname.dart - Текстовый виджет Фамилии
 ## Developers
 
 - [pojalustayuidi](https://github.com/pojalustayuidi)
