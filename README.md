@@ -26,12 +26,12 @@
 Информации об остановках.
 Информация ближайшего автобуса.
 
-### Итоговое видео: Текущая версия приложения
-[![Итоговое видео: Текущая версия приложения](https://img.youtube.com/vi/CqOgqNgTT30/0.jpg)](https://www.youtube.com/watch?v=CqOgqNgTT30)
+### Итоговое видео: Текущая версия приложения v0.2
+[![Итоговое видео: Текущая версия приложения](https://img.youtube.com/vi/Ci5NtzkHEME/0.jpg)](https://www.youtube.com/watch?v=Ci5NtzkHEME)
 
 ### Экран Регистрации и входа, интеграция Firebase FireStore в приложение
 [![Видео: Экраны регистрации и входа](https://img.youtube.com/vi/2WZKiYzL9ic/0.jpg)](https://www.youtube.com/watch?v=2WZKiYzL9ic)
-
+### Итоговое видео:  Версия приложения v0.1
 [![Демонстрация экрана входа и регистрации](https://img.youtube.com/vi/CqOgqNgTT30/0.jpg)](https://www.youtube.com/watch?v=CqOgqNgTT30)
 ### [Дополнительные материалы (Яндекс.Диск)](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
 ## Дизайн приложения
