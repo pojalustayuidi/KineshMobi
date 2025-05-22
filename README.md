@@ -46,7 +46,7 @@
 [[Figma Design KineshMobi](https://www.figma.com/design/BnfHzwWtoBNlHtyQs0cod4/KineshmaMobi?node-id=0-1&t=NCSJkJbsAseOPV4I-1)
 #### [Яндекс диск ](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
 
-### Планы
+### Дорожная карта
 В дальнейшем я планирую:
 - Добавление взаимодействия с геолокациий, чтобы приложение считывало у пользователя геолокацию и находила ближайшую остановку. 
 - Добавить карту с отображением маршрутов и остановок (например, с помощью Google Maps API).
