@@ -76,6 +76,8 @@ lib/
 ## Дополнительный материал
 ### Figma
 [Figma Design KineshMobi](https://www.figma.com/design/BnfHzwWtoBNlHtyQs0cod4/KineshmaMobi?node-id=0-1&t=NCSJkJbsAseOPV4I-1)
+[![Figma](https://img.shields.io/badge/Figma-Design-blue?logo=figma&logoColor=white)]([https://www.figma.com/design/BnfHzwWtoBNlHtyQs0cod4/KineshmaMobi?node-id=0-1&t=NCSJkJbsAseOPV4I-1])
+[![Yandex Disk](https://img.shields.io/badge/YandexDisk-Файлы-yellow?logo=yandex&logoColor=black)](https://disk.yandex.ru/d/ТВОЙ_ФАЙЛ)
 #### [Яндекс диск ](https://disk.yandex.ru/d/SM3CKLH5KRYWNA)
 ## Developers
 
