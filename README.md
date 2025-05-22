@@ -39,6 +39,9 @@
 
 
 ### Итоговый дизайн 
+https://www.youtube.com/watch?v=Ci5NtzkHEME&ab_channel=EgorKineshMobi
+https://youtu.be/Ci5NtzkHEME
+[![Видео: Прототип дизайна в Figma](ttps://img.youtube.com/vi/Ci5NtzkHEME/0.jpg)](https://www.youtube.com/watch?v=Ci5NtzkHEME)
 [![Видео: Прототип дизайна в Figma](https://img.youtube.com/vi/Scc7TpWkRD0/0.jpg)](https://www.youtube.com/watch?v=Scc7TpWkRD0)
 ### Figma
 [[Figma Design KineshMobi](https://www.figma.com/design/BnfHzwWtoBNlHtyQs0cod4/KineshmaMobi?node-id=0-1&t=NCSJkJbsAseOPV4I-1)
