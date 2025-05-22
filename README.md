@@ -56,15 +56,40 @@ https://youtu.be/Ci5NtzkHEME
 Добавить экрана с более подробным расписанием маршрута.
 
 ## Архитектура проекта
+```
+assets/                                 Ассеты: иконки, шрифты и другие ресурсы**
+lib/
+├── routes/                             # Файлы маршрутизации
+├── main_widget/                        # Общие виджеты, используемые на разных экранах
+├── screens/                            # Экраны приложения
+│   ├── screen_register_phone_number/   # Экран регистрации по номеру, никнейм/пароль
+│   │                                   # ⚠️ Удалён на момент версии v0.2
+│   ├── screen_home/                    # Главный экран
+│   │   ├── screen_home.dart            # Основной файл главного экрана
+│   │   └── widgets_home/               # Виджеты главного экрана
+│   │       ├── route_card.dart         # Карточка маршрутов
+│   │       ├── route_color.dart        # Цвета маршрутов
+│   │       ├── stop_dropdown.dart      # Выпадающий список (логика)
+│   │       ├── text_home_page.dart     # Текстовые виджеты для главного экрана
+│   │       └── textfield_stopinput.dart# Текстовое поле ввода остановки (логика)
+│   └── screen_route_detail/           # Папка с Экранлом с деталями маршрута
+│       └── widgets_route_detail/       # Виджеты для экрана деталей маршрута
+        └── screen_route_detail.dart/   # Экран деталей маршрута + Логика  + Виджеты
 
-- **lib/routes** — папка с маршрутизацией проекта 
-- **lib/mainWidget** — папка с виджетами которые часто используются на экранах
-- **lib/screens** — папка с экранами приложения
-- **lib/screens/screen_registerphonenumber** - папка с экраном и виджетами экрана регистрации
-     - **lib/screens/screen_registerphonenumber/screen_widget** - папка с виджетами для экрана регистрации 
-        - lib/screens/screen_registerphonenumber/screen_widget/continuebutton.dart - кнопка регистрации
-        - lib/screens/screen_registerphonenumber/screen_widget/phonenumberform.dart - Поле для ввода номера телефона
-        - lib/screens/screen_registerphonenumber/screen_widget/textphone.dart - Текстовые виджеты
+```
+
+
+   ```lib/screens/screen_home/widgets_home/route_card.dart - карточка маршрутов
+   ```lib/screens/screen_home/widgets_home/route_color.dart - цвета кругов для маршуртов
+   - ``lib/screens/screen_home/widgets_home/stop_dropdown.dart`` - выпдающий список ( логика) 
+   - ``lib/screens/screen_home/widgets_home/text_home_page.dart`` - текстовые виджеты для экрана
+   - ``lib/screens/screen_home/widgets_home/textfield_stopinput.dart`` - текстовое поле, логика
+     - ``lib/screens/screen_route_detail/`` - папка с экраном
+        - ``lib/screens/screen_route_detail/widgets_route_detail`` - папка с виджетами этого экрана
+                  - ``lib/screens/screen_route_detail/widgets_route_detail`` - папка с виджетами этого экрана
+      
+        - ``lib/screens/screen_route_detail/screen_route_detail.dart`` - экран более подробного маршрута
+
 - **lib/screens/screen_InputVerificationCode** - папка с экраном  подтверждение SMS - кода
    - **lib/screens/screen_InputVerificationCode/widget_inputverificationcode** - папка с виджетмами экрана потверждение SMS - Кода
        - lib/screens/screen_InputVerificationCode/widget_inputverificationcode/buttonsic.dart - кнопка "Продолжить"
