@@ -13,11 +13,14 @@ class TextHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 12),
+            SizedBox(height: 30),
             Text(
-              'Введите или выберите из предложенного списка свою остановку ',
+              'Введите или выберите из предложенного списка свою остановку',
               style: TextStyle(
-                  fontWeight: FontWeight.w400, color: Color(0xFF667085)),
+                  fontWeight: FontWeight.w400, color: Color(0xFF667085),
+              fontFamily: 'Franklin_Gothic_Medium',
+                fontSize: 16,
+              ),
             )
           ]),
     );

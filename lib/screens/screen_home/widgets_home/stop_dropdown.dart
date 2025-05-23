@@ -53,7 +53,11 @@ class _StopDropdownState extends State<StopDropdown> {
             controller: controller,
             focusNode: focusNode,
             decoration: InputDecoration(
-              labelText: 'Выберите остановку',
+              labelText: 'Введите свою остановку',labelStyle: TextStyle(
+              fontFamily: 'Franklin_Gothic_Medium',
+              fontSize: 18
+
+            ),
               hintText: 'Ваша остановка',
               border: const OutlineInputBorder(),
               suffixIcon: controller.text.isNotEmpty

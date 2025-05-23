@@ -1,6 +1,8 @@
 import 'package:KineshmaApp/screens/screen_home/widgets_home/text_home_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../main_widget/temporary_widget.dart';
+
 
 class ScreenSavedRasp extends StatefulWidget {
   const ScreenSavedRasp({super.key});
@@ -15,9 +17,10 @@ class _ScreenSavedRasp extends State<ScreenSavedRasp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: Center(
         child: Column(
-          children: [TextHomePage()],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [TemporaryWidget(),],
         ),
       ));
   }}

@@ -123,7 +123,7 @@ class _RouteCardState extends State<RouteCard> {
                                     child: Padding(
                                       padding: EdgeInsets.only(left: 5.0),
                                       child: GestureDetector(
-                                        child: Icon(Icons.heart_broken),
+                                        child: Icon(Icons.favorite_border_outlined),
                                       ),
                                     ),
                                   ),

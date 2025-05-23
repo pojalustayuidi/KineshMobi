@@ -27,7 +27,7 @@ class _ScreenHomeContentState extends State<ScreenHomeContent> {
                 height: 50,
               ),
               IconsLogo(),
-              TextHomePage(),
+              // TextHomePage(),
               SizedBox(
                 height: 50,
               ),

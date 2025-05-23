@@ -28,7 +28,6 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
     _loadStops();
   }
 
-  // Load all stops when the widget is initialized
   Future<void> _loadStops() async {
     final stops = await widget.apiStops.getStopsList();
     setState(() {
@@ -36,7 +35,6 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
     });
   }
 
-  // Helper function to get the next arrival time
   String _getNextArrivalTime(List<String> arrivalTimes) {
     final now = DateTime.now();
     final currentTime = '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
@@ -50,14 +48,13 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
     return '23:59';
   }
 
-  // Search routes based on the selected or entered stop
   void _searchRoute(Stop? selectedStop) async {
     setState(() {
       _selectedStop = selectedStop;
     });
 
-    if (selectedStop == null || selectedStop.id == -1) {
-      setState(() => _routeWidgets = [const Text('Остановка не найдена')]);
+    if (selectedStop == null ) {
+      setState(() => _routeWidgets = [const Text('Введите свою остановку в поле выше')]);
       return;
     }
 
@@ -67,7 +64,6 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
       return;
     }
 
-    // List to hold all route cards
     final allCards = <Map<String, dynamic>>[];
 
     for (final route in routes) {
