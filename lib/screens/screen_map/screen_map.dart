@@ -1,5 +1,4 @@
 import 'package:KineshmaApp/main_widget/temporary_widget.dart';
-import 'package:KineshmaApp/screens/screen_map/widgets_map/text_where_you_map_widget.dart';
 import 'package:flutter/material.dart';
 
 class ScreenMap extends StatefulWidget {

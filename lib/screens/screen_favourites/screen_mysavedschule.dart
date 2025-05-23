@@ -1,4 +1,3 @@
-import 'package:KineshmaApp/screens/screen_home/widgets_home/text_home_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../main_widget/temporary_widget.dart';
