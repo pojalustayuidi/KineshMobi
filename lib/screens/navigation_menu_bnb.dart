@@ -2,6 +2,7 @@ import 'package:KineshmaApp/screens/screen_Home/screen_home.dart';
 import 'package:KineshmaApp/screens/screen_favourites/screen_mysavedschule.dart';
 import 'package:KineshmaApp/screens/screen_map/screen_map.dart';
 import 'package:KineshmaApp/screens/screen_settings/screen_settings.dart';
+import 'package:KineshmaApp/screens/screen_stops/screen_stops.dart';
 import 'package:flutter/material.dart';
 
 class MainNavigationWrapper extends StatelessWidget {
@@ -11,16 +12,11 @@ class MainNavigationWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-        return MainNavigationContent(
-    );
+    return MainNavigationContent();
   }
 }
 
 class MainNavigationContent extends StatefulWidget {
-
-
   const MainNavigationContent({
     super.key,
   });
@@ -39,9 +35,9 @@ class _MainNavigationContentState extends State<MainNavigationContent> {
     _screens = [
       ScreenHomeContent(),
       const ScreenSavedRasp(),
-      ScreenMap(
-      ),
+      ScreenMap(),
       ScreenSettings(),
+      ScreenStops(),
     ];
   }
 
@@ -60,6 +56,8 @@ class _MainNavigationContentState extends State<MainNavigationContent> {
           BottomNavigationBarItem(icon: Icon(Icons.map_sharp), label: 'Карта'),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Настройки'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_month), label: 'Остановки ')
         ],
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,

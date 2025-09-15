@@ -20,8 +20,6 @@ class _ScreenAccountState extends State<ScreenAccount> {
     return Scaffold(
       body: Column(
         children: [
-          MyNameWidget(
-          ),
           SizedBox(
             height: 10,
           ),

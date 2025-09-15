@@ -10,7 +10,7 @@ class IconsLogo extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              'assets/logobus.png',
+              'assets/logoapp.png',
               scale: 0.8,
             )
           ],

@@ -17,8 +17,9 @@ class TextHomePage extends StatelessWidget {
             Text(
               'Введите или выберите из предложенного списка свою остановку',
               style: TextStyle(
-                  fontWeight: FontWeight.w400, color: Color(0xFF667085),
-              fontFamily: 'Franklin_Gothic_Medium',
+                fontWeight: FontWeight.w400,
+                color: Color(0xFF667085),
+                fontFamily: 'Franklin_Gothic_Medium',
                 fontSize: 16,
               ),
             )
@@ -37,14 +38,19 @@ class TextMarshrut extends StatelessWidget {
       children: [
         Text(
           'Выберите маршрут:',
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Franklin_Gothic_Medium'),
         ),
         SizedBox(
-          height: 16,
+          height: 2,
         ),
         Text(
           'Для того чтобы посмотреть более подробнее маршрут нажмите на него',
-          style: TextStyle(fontWeight: FontWeight.w400, color: const Color(0xFF667085)),
+          style: TextStyle(
+              fontWeight: FontWeight.w400,
+              color: const Color(0xFF667085),
+              fontSize: 12),
         )
       ],
     );

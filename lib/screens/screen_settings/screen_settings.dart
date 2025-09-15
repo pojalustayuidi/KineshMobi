@@ -15,7 +15,7 @@ class ScreenSettings extends StatelessWidget {
               children: [
                 const SizedBox(height: 40),
                 ContainergradientText(),
-                const SizedBox(height: 32),
+                const SizedBox(height: 40),
                 SettingsWidget(
                 ),
               ],

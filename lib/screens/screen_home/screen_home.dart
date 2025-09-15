@@ -3,7 +3,6 @@ import '../../main_widget/iconlogo.dart';
 import 'package:flutter/material.dart';
 import '../../services/data/repositories/api_stops.dart';
 
-
 class ScreenHomeContent extends StatefulWidget {
   const ScreenHomeContent({super.key});
 
