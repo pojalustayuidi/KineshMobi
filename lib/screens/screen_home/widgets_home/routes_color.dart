@@ -6,7 +6,7 @@ const Map<String, Color> routeColors = {
   '3': Color(0xFF50CB6F), // 3
   '3-a': Color(0xFF6AEF88), // 3-a
   '4': Color(0xFFFF0000), //4
-  '5': Color(0xFFC92B2E), // 5
+  '5': Color(0xFFC8272A), // 5
   '6': Color(0xFFFF6E3C), // 6
   '7': Color(0xFFD1A239), // 7
   '8': Color(0xFF9146A8), // 8

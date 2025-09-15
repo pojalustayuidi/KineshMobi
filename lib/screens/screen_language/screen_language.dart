@@ -1,5 +1,4 @@
 import 'package:KineshmaApp/screens/screen_language/widgets_language/change_language_widget.dart';
-import 'package:KineshmaApp/screens/screen_language/widgets_language/radio_button_language.dart';
 import 'package:flutter/material.dart';
 
 class ScreenLanguage extends StatelessWidget {

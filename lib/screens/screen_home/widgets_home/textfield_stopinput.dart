@@ -1,7 +1,7 @@
+import 'package:KineshmaApp/screens/screen_home/widgets_home/tabs_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/routes_color.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/route_card.dart';
-import 'package:KineshmaApp/screens/screen_home/widgets_home/text_home_page.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/stop_dropdown.dart';
 import 'package:KineshmaApp/services/data/repositories/api_stops.dart';
 import 'package:KineshmaApp/services/data/models/stop.dart';
@@ -37,7 +37,8 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
 
   String _getNextArrivalTime(List<String> arrivalTimes) {
     final now = DateTime.now();
-    final currentTime = '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+    final currentTime =
+        '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
 
     final sortedTimes = arrivalTimes..sort();
     for (final time in sortedTimes) {
@@ -53,8 +54,9 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
       _selectedStop = selectedStop;
     });
 
-    if (selectedStop == null ) {
-      setState(() => _routeWidgets = [const Text('Введите свою остановку в поле выше')]);
+    if (selectedStop == null) {
+      setState(() =>
+          _routeWidgets = [const Text('Введите свою остановку в поле выше')]);
       return;
     }
 
@@ -72,7 +74,8 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
       void addDirection(List<BusStation> direction, Color color) {
         final index = direction.indexWhere((s) => s.stopId == selectedStop.id);
         if (index != -1) {
-          final nextArrival = _getNextArrivalTime(direction[index].arrivalTimes);
+          final nextArrival =
+              _getNextArrivalTime(direction[index].arrivalTimes);
           allCards.add({
             'route': route,
             'direction': direction,
@@ -87,38 +90,43 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
       addDirection(route.backward, darkenColor(baseColor));
     }
 
-    // Sort by next arrival time
     allCards.sort((a, b) => a['nextArrival'].compareTo(b['nextArrival']));
 
-    // Create widgets
-    final widgets = allCards.map<Widget>((card) => RouteCard(
-      route: card['route'],
-      direction: card['direction'],
-      color: card['color'],
-      stopId: card['stopId'],
-    )).toList();
 
-    setState(() => _routeWidgets = widgets.isNotEmpty ? widgets : [const Text('Маршруты не найдены')]);
+    final widgets = allCards
+        .map<Widget>((card) => RouteCard(
+              route: card['route'],
+              direction: card['direction'],
+              color: card['color'],
+              stopId: card['stopId'],
+            ))
+        .toList();
+
+    setState(() => _routeWidgets =
+        widgets.isNotEmpty ? widgets : [const Text('Маршруты не найдены')]);
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-return GestureDetector(
-  onTap: (){FocusScope.of(context).unfocus();},
-     child:  Column(
-      children: [
-        StopDropdown(
-          stops: _allStops,
-          selectedStop: _selectedStop,
-          onChanged: _searchRoute,
-          width: screenWidth * 0.85,
-        ),
-        const SizedBox(height: 50),
-        const TextMarshrut(),
-        const SizedBox(height: 10),
-        Column(children: _routeWidgets),
-      ],
-    ),);
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Column(
+        children: [
+          StopDropdown(
+            stops: _allStops,
+            selectedStop: _selectedStop,
+            onChanged: _searchRoute,
+            width: screenWidth * 0.85,
+          ),
+          const SizedBox(height: 50),
+          TabsSchedule(),
+          const SizedBox(height: 10),
+          Column(children: _routeWidgets),
+        ],
+      ),
+    );
   }
 }

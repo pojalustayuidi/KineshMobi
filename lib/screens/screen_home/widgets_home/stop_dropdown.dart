@@ -33,7 +33,9 @@ class _StopDropdownState extends State<StopDropdown> {
           }
           return widget.stops.where((Stop stop) {
             return textEditingValue.text.isEmpty ||
-                stop.name.toLowerCase().contains(textEditingValue.text.toLowerCase());
+                stop.name
+                    .toLowerCase()
+                    .contains(textEditingValue.text.toLowerCase());
           });
         },
         displayStringForOption: (Stop stop) => stop.name,
@@ -44,8 +46,10 @@ class _StopDropdownState extends State<StopDropdown> {
             _isDropdownRequested = false;
           });
         },
-        fieldViewBuilder: (BuildContext context, TextEditingController controller,
-            FocusNode focusNode, VoidCallback onFieldSubmitted) {
+        fieldViewBuilder: (BuildContext context,
+            TextEditingController controller,
+            FocusNode focusNode,
+            VoidCallback onFieldSubmitted) {
           if (widget.selectedStop != null && controller.text.isEmpty) {
             controller.text = widget.selectedStop!.name;
           }
@@ -53,41 +57,46 @@ class _StopDropdownState extends State<StopDropdown> {
             controller: controller,
             focusNode: focusNode,
             decoration: InputDecoration(
-              labelText: 'Введите свою остановку',labelStyle: TextStyle(
-              fontFamily: 'Franklin_Gothic_Medium',
-              fontSize: 18
-
-            ),
+              filled: true,
+              fillColor: Color(0xFFEDF3F7),//0xFFEFF6FB //0xFFF2F6F9 //0xFFEDF3F7
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+              labelStyle: TextStyle(
+                fontFamily: 'Franklin_Gothic_Medium',
+                fontSize: 16,
+              ),
               hintText: 'Ваша остановка',
-              border: const OutlineInputBorder(),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  ),
               suffixIcon: controller.text.isNotEmpty
                   ? IconButton(
-                icon: const Icon(Icons.clear),
-                onPressed: () {
-                  controller.clear();
-                  widget.onChanged(null);
-                  setState(() {
-                    _isDropdownRequested = false;
-                  });
-                },
-              )
+                      icon: const Icon(Icons.clear),
+                      onPressed: () {
+                        controller.clear();
+                        widget.onChanged(null);
+                        setState(() {
+                          _isDropdownRequested = false;
+                        });
+                      },
+                    )
                   : IconButton(
-                icon: Icon(
-                  _isDropdownRequested
-                      ? Icons.arrow_drop_up
-                      : Icons.arrow_drop_down,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isDropdownRequested = !_isDropdownRequested;
-                  });
-                  if (_isDropdownRequested) {
-                    focusNode.requestFocus();
-                  } else {
-                    FocusScope.of(context).unfocus();
-                  }
-                },
-              ),
+                      icon: Icon(
+                        _isDropdownRequested
+                            ? Icons.arrow_drop_up
+                            : Icons.arrow_drop_down,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isDropdownRequested = !_isDropdownRequested;
+                        });
+                        if (_isDropdownRequested) {
+                          focusNode.requestFocus();
+                        } else {
+                          FocusScope.of(context).unfocus();
+                        }
+                      },
+                    ),
             ),
             onFieldSubmitted: (_) => onFieldSubmitted(),
             onChanged: (value) {
@@ -98,7 +107,7 @@ class _StopDropdownState extends State<StopDropdown> {
                 });
               } else {
                 final matchingStop = widget.stops.firstWhere(
-                      (stop) => stop.name.toLowerCase() == value.toLowerCase(),
+                  (stop) => stop.name.toLowerCase() == value.toLowerCase(),
                   orElse: () => Stop(name: value, id: -1),
                 );
                 widget.onChanged(matchingStop);

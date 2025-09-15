@@ -9,9 +9,11 @@ class IconsLogo extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            Image.asset(
-              'assets/logoapp.png',
-              scale: 0.8,
+            SizedBox(width: 400,height: 70,
+              child: Image.asset(
+                'assets/apppppppppp.png',
+                scale: 0.1,fit: BoxFit.fitWidth,
+              ),
             )
           ],
         ),

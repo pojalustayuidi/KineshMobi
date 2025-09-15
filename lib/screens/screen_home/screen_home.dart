@@ -22,12 +22,12 @@ class _ScreenHomeContentState extends State<ScreenHomeContent> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 50,
+                height: 30,
               ),
               IconsLogo(),
               // TextHomePage(),
               SizedBox(
-                height: 50,
+                height: 30,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10),

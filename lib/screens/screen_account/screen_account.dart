@@ -1,4 +1,3 @@
-import 'package:KineshmaApp/screens/screen_account/widget_account/my_name_widget.dart';
 import 'package:KineshmaApp/screens/screen_account/widget_account/my_password_widget.dart';
 import 'package:flutter/material.dart';
 
