@@ -1,4 +1,3 @@
-import 'package:KineshmaApp/screens/screen_home/widgets_home/tabs_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/routes_color.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/route_card.dart';
@@ -10,8 +9,10 @@ import '../utils_home/darken_color_utils.dart';
 
 class TextfieldStopinput extends StatefulWidget {
   final ApiStops apiStops;
+  final String mode;
 
-  const TextfieldStopinput({super.key, required this.apiStops});
+  const TextfieldStopinput(
+      {super.key, required this.mode, required this.apiStops});
 
   @override
   State<TextfieldStopinput> createState() => _TextfieldStopinputState();
@@ -89,9 +90,9 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
       addDirection(route.forward, baseColor);
       addDirection(route.backward, darkenColor(baseColor));
     }
-
-    allCards.sort((a, b) => a['nextArrival'].compareTo(b['nextArrival']));
-
+    if (widget.mode == "nearest") {
+      allCards.sort((a, b) => a['nextArrival'].compareTo(b['nextArrival']));
+    }
 
     final widgets = allCards
         .map<Widget>((card) => RouteCard(
@@ -122,7 +123,12 @@ class _TextfieldStopinputState extends State<TextfieldStopinput> {
             width: screenWidth * 0.85,
           ),
           const SizedBox(height: 50),
-          TabsSchedule(),
+          Text(
+            widget.mode == "nearest"
+                ? "Ближайшие автобусы"
+                : "Полное расписание",
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 10),
           Column(children: _routeWidgets),
         ],

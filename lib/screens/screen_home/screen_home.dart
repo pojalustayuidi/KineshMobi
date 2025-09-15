@@ -32,7 +32,7 @@ class _ScreenHomeContentState extends State<ScreenHomeContent> {
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: TextfieldStopinput(
-                  apiStops: apiStops,
+                  apiStops: apiStops, mode: "nearest",
                 ),
               )
             ],
