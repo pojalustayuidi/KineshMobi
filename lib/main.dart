@@ -1,13 +1,23 @@
 import 'package:KineshmaApp/routes/routes.dart';
+import 'package:KineshmaApp/services/data/repositories/user_repositoriy.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 void main() async {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final userRepository = UserRepository(prefs);
+  final String uniqueUserId = await userRepository.getOrCreateUserId();
+
+  runApp(MyApp(userId: uniqueUserId,
+  userRepository: userRepository));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String userId;
+  final UserRepository userRepository;
+  const MyApp({super.key, required this.userId, required this.userRepository});
 
   @override
   Widget build(BuildContext context) {

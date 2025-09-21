@@ -119,7 +119,7 @@ class ScreenRouteDetail extends StatelessWidget {
                     color: color,
                     child: Center(
                       child: Text(
-                        '${route.routeShortName}',
+                        route.routeShortName,
                         style: const TextStyle(
                           fontSize: 23,
                           fontFamily: 'Franklin_Gothic_Medium',

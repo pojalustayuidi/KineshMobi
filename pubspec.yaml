@@ -32,6 +32,9 @@ dependencies:
   auto_route: ^10.0.1
   crypto: ^3.0.6
   dio: ^5.8.0+1
+  shared_preferences: ^2.3.3
+  uuid: ^4.5.1
+
 #  drift: ^2.26.1
 #  sqlite3_flutter_libs: ^0.5.32
 #  path_provider: ^2.1.5

@@ -1,4 +1,4 @@
-import 'package:KineshmaApp/screens/screen_home/widgets_home/textfield_stopinput.dart';
+import 'package:KineshmaApp/screens/screen_home/widgets_home/stop_routes_panel_widget.dart';
 import '../../main_widget/iconlogo.dart';
 import 'package:flutter/material.dart';
 import '../../services/data/repositories/api_stops.dart';
@@ -16,23 +16,33 @@ class _ScreenHomeContentState extends State<ScreenHomeContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      backgroundColor: Color(0xFFF7FBFD),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(86), // высота AppBar
+        child: AppBar(
+          backgroundColor: Color(0xFFF7FBFD),
+          elevation: 1,
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.only(top: 0, left: 2, ), // задаём фиксированные отступы
+            child: Align(
+              alignment: Alignment.bottomLeft, // логотип в левом нижнем углу AppBar
+              child: SizedBox(
+                child: IconsLogo()
+              ),
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 30,
-              ),
-              IconsLogo(),
               // TextHomePage(),
-              SizedBox(
-                height: 30,
-              ),
               Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: TextfieldStopinput(
-                  apiStops: apiStops, mode: "nearest",
+                child: StopRoutesPanel(
+                  apiStops: apiStops,
                 ),
               )
             ],

@@ -1,56 +1,65 @@
-import 'package:KineshmaApp/screens/screen_home/widgets_home/textfield_stopinput.dart';
 import 'package:flutter/material.dart';
 
-import '../../../services/data/repositories/api_stops.dart';
+class TabsSchedules extends StatefulWidget {
+  final Widget nearestWidget;
+  final Widget fullScheduleWidget;
 
-class TabsSchedule extends StatefulWidget {
-  final ApiStops apiStops;
-
-  const TabsSchedule({
+  const TabsSchedules({
     super.key,
-    required this.apiStops,
+    required this.nearestWidget,
+    required this.fullScheduleWidget,
   });
 
   @override
-  State<TabsSchedule> createState() => _TabsScheduleState();
+  State<TabsSchedules> createState() => _TabsSchedulesState();
 }
 
-class _TabsScheduleState extends State<TabsSchedule> {
-  int selectedIndex = 0;
+class _TabsSchedulesState extends State<TabsSchedules> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child: Column(children: [
-          Container(
-            decoration: BoxDecoration(
-                color: const Color(0xFFEDF3F7),
-                borderRadius: BorderRadius.circular(16)),
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            child: const TabBar(
-                indicator: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                ),
-                labelColor: Color(0xFF1F59DF),
-                unselectedLabelColor: Colors.black,
-                tabs: [
-                  Tab(
-                    text: 'Ближайший автобус',
-                  ),
-                  Tab(
-                    text: 'Полное расписание',
-                  )
-                ]),
+    return Column(
+      children: [
+        TabBar(
+          controller: _tabController,
+          labelColor: Color(0xFF333333),
+          indicatorColor: Color(0xFF66B58B),
+          unselectedLabelColor: Color(0xFF7A8C99),
+          tabs: const [
+            Tab(text: 'Ближайшие автобусы'),
+            Tab(text: 'Полное расписание'),
+          ],
+        ),
+        SizedBox(
+          height: 800,
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              ListView(
+                padding: const EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 32),
+                children: [widget.nearestWidget],
+              ),
+              ListView(
+                padding: const EdgeInsets.all(8),
+                children: [widget.fullScheduleWidget],
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: TabBarView(children: [
-              TextfieldStopinput(apiStops: widget.apiStops, mode: "nearest"),
-              TextfieldStopinput(mode: "full", apiStops: widget.apiStops)
-            ]),
-          )
-        ]));
+        ),
+      ],
+    );
   }
 }

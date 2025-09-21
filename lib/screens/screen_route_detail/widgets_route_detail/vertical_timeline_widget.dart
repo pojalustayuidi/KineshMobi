@@ -10,7 +10,7 @@ class VerticalTimeline extends StatelessWidget {
   final Color filledDotColor;
 
   const VerticalTimeline({
-    Key? key,
+    super.key,
     this.totalDots = 10,
     this.filledDots = const [0, 9],
     this.dotSize = 20.0,
@@ -18,7 +18,7 @@ class VerticalTimeline extends StatelessWidget {
     this.lineColor = Colors.black,
     this.dotColor = Colors.white,
     this.filledDotColor = Colors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

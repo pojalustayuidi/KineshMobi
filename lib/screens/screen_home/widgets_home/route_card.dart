@@ -29,7 +29,7 @@ class _RouteCardState extends State<RouteCard> {
     final isForward = widget.direction == widget.route.forward;
 
     int stopIndex =
-        adjustedDirection.indexWhere((s) => s.stopId == widget.stopId);
+    adjustedDirection.indexWhere((s) => s.stopId == widget.stopId);
     if (stopIndex == -1) return SizedBox();
 
     if (!isForward) {
@@ -48,9 +48,9 @@ class _RouteCardState extends State<RouteCard> {
         .asMap()
         .entries
         .where((entry) {
-          final index = entry.key;
-          return index > stopIndex;
-        })
+      final index = entry.key;
+      return index > stopIndex;
+    })
         .map((entry) => entry.value.name)
         .take(3)
         .join(', ');
@@ -69,117 +69,138 @@ class _RouteCardState extends State<RouteCard> {
           ),
         );
       },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        elevation: 2,
-        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8),
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: widget.color,
-                      shape: BoxShape.circle,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      widget.route.routeShortName,
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontFamily: 'Franklin_Gothic_Medium',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+      child: SafeArea(
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          color: Color(0xFFFFFFFF),
+          elevation: 2,
+          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: widget.color,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    widget.route.routeShortName,
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontFamily: 'Franklin_Gothic_Medium',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: '$start – $end',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: 'Century_Gothic',
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    WidgetSpan(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(left: 5.0),
-                                        child: GestureDetector(
-                                          child: Icon(
-                                              Icons.favorite_border_outlined),
-                                        ),
-                                      ),
+                ),
+                SizedBox(width: 12),
+
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '$start – $end',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Century_Gothic',
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          // Иконка сердца
+                          // GestureDetector(
+                          //   child: Icon(
+                          //     Icons.favorite_border_outlined,
+                          //     size: 20,
+                          //     color: Colors.grey,
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                      SizedBox(height: 4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              keyStops.isNotEmpty
+                                  ? keyStops.toUpperCase()
+                                  : 'Нет промежуточных остановок',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: 'Franklin_Gothic_Medium',
+                                color: Colors.grey,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'БУДЕТ В',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Century_Gothic',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 2),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFE8F5E8),
+                                  borderRadius: BorderRadius.circular(6),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.05),
+                                      blurRadius: 2,
+                                      offset: Offset(0, 1),
                                     ),
                                   ],
                                 ),
+                                child: Text(
+                                  nextTime,
+                                  style: TextStyle(
+                                    color: Color(0xFF234840),
+                                    fontSize: 20,
+                                    fontFamily: 'Century_Gothic',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          keyStops.isNotEmpty
-                              ? keyStops.toUpperCase()
-                              : 'Нет промежуточных остановок',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: 'Franklin_Gothic_Medium',
-                            color: Colors.grey,
+                            ],
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: 2),
-                        Row(
-                          children: [
-                            Text(
-                              'БУДЕТ В',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'Century_Gothic',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              nextTime,
-                              style: TextStyle(
-                                color: Color(0xFF234840),
-                                fontSize: 23,
-                                fontFamily: 'Century_Gothic',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
