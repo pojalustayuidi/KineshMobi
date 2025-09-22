@@ -140,7 +140,7 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
                 onChanged: _searchRoute,
                 width: screenWidth * 0.85,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               TabsSchedules(
                 nearestWidget: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

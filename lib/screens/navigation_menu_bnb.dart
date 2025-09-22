@@ -59,7 +59,7 @@ class _MainNavigationContentState extends State<MainNavigationContent> {
           BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month), label: 'Остановки ')
         ],
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
         showSelectedLabels: true,
         showUnselectedLabels: true,

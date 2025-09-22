@@ -37,37 +37,37 @@ class AppTextField extends StatelessWidget {
                 onPressed: onClear,
               )
             : IconButton(
-                icon: Icon(
-                  isDropdownRequested
-                      ? Icons.arrow_drop_up
-                      : Icons.arrow_drop_down,
-                ),
+                icon: Icon(isDropdownRequested ? Icons.mic : Icons.mic),
                 onPressed: onToggleDropdown,
               );
 
         return TextFormField(
           controller: controller,
           focusNode: focusNode,
-          style: TextStyle(color: Color(0xFF8A9BAA), shadows: [
-            Shadow(
-              offset: Offset(1, 1),
-              blurRadius: 2,
-              color: Colors.black26,
-            ),
-          ],
+          style: TextStyle(
+            color: Color(0xFF8A9BAA),
+            shadows: [
+              Shadow(
+                offset: Offset(1, 1),
+                blurRadius: 2,
+                color: Colors.black26,
+              ),
+            ],
           ),
-
-          decoration: appInputDecoration(hintText: hint,suffixIcon: suffix)
-              .copyWith(
+          decoration:
+              appInputDecoration(hintText: hint, suffixIcon: suffix).copyWith(
                   prefixIcon: prefixIcon ?? const Icon(Icons.search),
                   filled: true,
-                  hintStyle:  const TextStyle(color: Color(0xFF8A9BAA), shadows: [
-                    Shadow(
-                      offset: Offset(0.5, 0.5),
-                      blurRadius: 1,
-                      color: Colors.black12,
-                    ),
-                  ],),
+                  hintStyle: const TextStyle(
+                    color: Color(0xFF8A9BAA),
+                    shadows: [
+                      Shadow(
+                        offset: Offset(0.5, 0.5),
+                        blurRadius: 1,
+                        color: Colors.black12,
+                      ),
+                    ],
+                  ),
                   fillColor: Color(0xFFF0F6FA)),
           onChanged: onChanged,
           onFieldSubmitted: (s) => onSubmitted?.call(s),

@@ -19,17 +19,14 @@ class _ScreenHomeContentState extends State<ScreenHomeContent> {
 
       backgroundColor: Color(0xFFF7FBFD),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(86), // высота AppBar
+        preferredSize: Size.fromHeight(86),
         child: AppBar(
           backgroundColor: Color(0xFFF7FBFD),
           elevation: 1,
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.only(top: 0, left: 2, ), // задаём фиксированные отступы
-            child: Align(
-              alignment: Alignment.bottomLeft, // логотип в левом нижнем углу AppBar
-              child: SizedBox(
-                child: IconsLogo()
-              ),
+          flexibleSpace: Align(
+            alignment: Alignment.bottomLeft,
+            child: SizedBox(
+              child: IconsLogo()
             ),
           ),
         ),
