@@ -4,18 +4,21 @@ import 'package:KineshmaApp/services/data/models/bus_station.dart';
 import 'package:KineshmaApp/services/data/models/route_destination.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main_widget/arrival_badge.dart';
+import '../../../main_widget/route_direction_text.dart';
+
 class RouteCard extends StatefulWidget {
   final RouteDestation route;
   final List<BusStation> direction;
   final Color color;
   final int stopId;
-
+  final String? nextArrival;
   const RouteCard({
     super.key,
     required this.route,
     required this.direction,
     required this.color,
-    required this.stopId,
+    required this.stopId, this.nextArrival,
   });
 
   @override
@@ -110,16 +113,9 @@ class _RouteCardState extends State<RouteCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: Text(
-                              '$start – $end',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'Century_Gothic',
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black,
-                              ),
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
+                            child: RouteDirectionText(
+                              start: start.toUpperCase(),
+                              end: end.toUpperCase(),
                             ),
                           ),
                           // Иконка сердца
@@ -151,50 +147,9 @@ class _RouteCardState extends State<RouteCard> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFE8F5E8),
-                                  borderRadius: BorderRadius.circular(12),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.05),
-                                      blurRadius: 2,
-                                      offset: Offset(0, 1),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'БУДЕТ В',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: 'Century_Gothic',
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
-                                      ),
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      nextTime,
-                                      style: TextStyle(
-                                        color: Color(0xFF234840),
-                                        fontSize: 20,
-                                        fontFamily: 'Century_Gothic',
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ])
-              ],
+                            ArrivalBadge(nextTime: nextTime),
+                          ]),
+                    ],
                   ),
                 ),
               ],

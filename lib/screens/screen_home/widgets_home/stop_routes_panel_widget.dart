@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:KineshmaApp/screens/screen_home/widgets_home/full_schedule_card_widget.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/stop_auto_complete_field.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/tabs_schedule.dart';
@@ -24,19 +26,49 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
   List<Widget> _fullScheduleWidgets = [];
   List<Stop> _allStops = [];
   Stop? _selectedStop;
+  Timer? timer;
 
   @override
   void initState() {
     super.initState();
     _loadStops();
+    _startMinuteTimer();
+  }
+  void _startMinuteTimer() {
+    final now = DateTime.now();
+    final int secondsUntilNextMinute = 60 - now.second;
+    final int msUntilNextMinute = secondsUntilNextMinute * 1000 - now.millisecond;
+
+    Timer(Duration(milliseconds: msUntilNextMinute), () {
+      _updateRoutes();
+      timer = Timer.periodic(const Duration(minutes: 1), (_) {
+        _updateRoutes();
+      });
+    });
+  }
+  void _updateRoutes() {
+    _loadStops();
+    if (_selectedStop != null) {
+      _searchRoute(_selectedStop);
+    }
   }
 
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
   Future<void> _loadStops() async {
     final stops = await widget.apiStops.getStopsList();
     setState(() {
       _allStops = stops;
     });
   }
+
+
+
+
 
   String _getNextArrivalTime(List<String> arrivalTimes) {
     final now = DateTime.now();
@@ -61,7 +93,9 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
     if (selectedStop == null) {
       setState(() {
         _nearestWidgets = [const Text('Введите свою остановку в поле выше')];
-        _fullScheduleWidgets = [const Text('Введите свою остановку в поле выше')];
+        _fullScheduleWidgets = [
+          const Text('Введите свою остановку в поле выше')
+        ];
       });
       return;
     }
@@ -85,7 +119,8 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
       void addDirection(List<BusStation> direction, Color color) {
         final index = direction.indexWhere((s) => s.stopId == selectedStop.id);
         if (index != -1) {
-          final nextArrival = _getNextArrivalTime(direction[index].arrivalTimes);
+          final nextArrival =
+              _getNextArrivalTime(direction[index].arrivalTimes);
           nearestCards.add({
             'route': route,
             'direction': direction,
@@ -99,7 +134,6 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
       addDirection(route.forward, baseColor);
       addDirection(route.backward, darkenColor(baseColor));
 
-      // Полное расписание
       fullCards.add(FullScheduleCard(route: route));
     }
 
@@ -108,13 +142,14 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
     setState(() {
       _nearestWidgets = nearestCards.isNotEmpty
           ? nearestCards
-          .map((card) => RouteCard(
-        route: card['route'],
-        direction: card['direction'],
-        color: card['color'],
-        stopId: card['stopId'],
-      ))
-          .toList()
+              .map((card) => RouteCard(
+                    route: card['route'],
+                    direction: card['direction'],
+                    color: card['color'],
+                    stopId: card['stopId'],
+        nextArrival: card['nextArrival'],
+                  ))
+              .toList()
           : [const MessageDisplay(message: 'Маршруты не найдены')];
 
       _fullScheduleWidgets = fullCards.isNotEmpty
@@ -148,14 +183,18 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
                 ),
                 fullScheduleWidget: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [..._fullScheduleWidgets,SizedBox(width: 50,) ],
+                  children: [
+                    ..._fullScheduleWidgets,
+                    SizedBox(
+                      width: 50,
+                    )
+                  ],
                 ),
               ),
-           ],
+            ],
           ),
         ),
       ),
     );
   }
 }
-

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class RouteHeader extends StatelessWidget {
+import '../../../main_widget/route_direction_text.dart';
+
+class RouteHeader extends StatefulWidget {
   final String routeName;
   final String currentStop;
   final String endStop;
@@ -15,47 +17,39 @@ class RouteHeader extends StatelessWidget {
   });
 
   @override
+  State<RouteHeader> createState() => _RouteHeaderState();
+}
+
+class _RouteHeaderState extends State<RouteHeader> {
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
-        Text(
-          '${currentStop.toUpperCase()} - ${endStop.toUpperCase()}',
-          style: const TextStyle(
-            fontFamily: 'Century_Gothic',
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+        Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: widget.color,
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              widget.routeName,
+              style: const TextStyle(
+                fontSize: 23,
+                fontFamily: 'Franklin_Gothic_Medium',
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                overflow: TextOverflow.ellipsis,
+              ),maxLines: 2,
+            ),
           ),
         ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            Container(
-              width: 60,
-              height: 30,
-              color: color,
-              child: Center(
-                child: Text(
-                  routeName,
-                  style: const TextStyle(
-                    fontSize: 23,
-                    fontFamily: 'Franklin_Gothic_Medium',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              'АВТОБУС',
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: 'Franklin_Gothic_Medium',
-              ),
-            ),
-          ],
+        SizedBox(
+          width: 24,
         ),
+        RouteDirectionText(start: widget.currentStop, end: widget.endStop,),
+        const SizedBox(height: 16),
       ],
     );
   }

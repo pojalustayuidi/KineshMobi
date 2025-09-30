@@ -1,13 +1,13 @@
-import 'package:KineshmaApp/screens/screen_route_detail/widgets_route_detail/arrival_info_widget.dart';
-import 'package:KineshmaApp/screens/screen_route_detail/widgets_route_detail/route_header_widget.dart';
-import 'package:KineshmaApp/screens/screen_route_detail/widgets_route_detail/vertical_timeline_widget.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:KineshmaApp/main_widget/arrival_badge.dart';
+import 'package:KineshmaApp/screens/screen_route_detail/widgets_route_detail/bus_route_timeline.dart';
+import 'package:KineshmaApp/screens/screen_route_detail/widgets_route_detail/route_header_widget.dart';
 import 'package:KineshmaApp/services/data/models/bus_station.dart';
 import 'package:KineshmaApp/services/data/models/route_destination.dart';
 import '../screen_home/utils_home/time_utils.dart';
-import 'widgets_route_detail/stop_tile_widget.dart';
 
-class ScreenRouteDetail extends StatelessWidget {
+class ScreenRouteDetail extends StatefulWidget {
   final RouteDestation route;
   final bool isForward;
   final int stopId;
@@ -22,31 +22,44 @@ class ScreenRouteDetail extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    List<BusStation> direction = isForward ? route.forward : route.backward;
-    int stopIndex = direction.indexWhere((s) => s.stopId == stopId);
+  State<ScreenRouteDetail> createState() => _ScreenRouteDetailState();
+}
 
-    if (!isForward) {
+class _ScreenRouteDetailState extends State<ScreenRouteDetail> {
+  late List<BusStation> direction;
+  late Map<int, String> stopTimes;
+  late List<String> stopNames;
+  late int currentTimelineIndex;
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    prepareStops();
+    currentTimelineIndex = calculateCurrentIndex();
+    // обновляем текущую остановку каждые 30 секунд
+    timer = Timer.periodic(const Duration(seconds: 30), (_) {
+      setState(() {
+        currentTimelineIndex = calculateCurrentIndex();
+      });
+    });
+  }
+
+  void prepareStops() {
+    direction = widget.isForward ? widget.route.forward : widget.route.backward;
+
+    int stopIndex = direction.indexWhere((s) => s.stopId == widget.stopId);
+    if (!widget.isForward) {
       direction = direction.reversed.toList();
-      stopIndex = direction.indexWhere((s) => s.stopId == stopId);
+      stopIndex = direction.indexWhere((s) => s.stopId == widget.stopId);
     }
-
-    final currentStop = direction[stopIndex].name;
-    final endStop = direction.last.name;
 
     final currentStopTimes = direction[stopIndex].arrivalTimes;
     final currentTimeRaw = findNextArrivalTime(currentStopTimes) ??
         (currentStopTimes.isNotEmpty ? currentStopTimes[0] : 'Нет времени');
     final currentTime = formatTimeWithoutSeconds(currentTimeRaw);
 
-    final allStops = direction
-        .asMap()
-        .entries
-        .where((entry) => entry.key >= stopIndex)
-        .map((entry) => MapEntry(entry.key, entry.value))
-        .toList();
-
-    final stopTimes = <int, String>{};
+    stopTimes = <int, String>{};
     stopTimes[stopIndex] = currentTime;
 
     for (int i = stopIndex + 1; i < direction.length; i++) {
@@ -59,8 +72,49 @@ class ScreenRouteDetail extends StatelessWidget {
       stopTimes[i] = nextTime;
     }
 
-    final endTime = stopTimes[direction.length - 1] ?? 'Нет времени';
-    final remainingStopsCount = direction.length - 1 - stopIndex;
+    final allStops = direction
+        .asMap()
+        .entries
+        .where((entry) => entry.key >= stopIndex)
+        .map((entry) => MapEntry(entry.key, entry.value))
+        .toList();
+
+    stopNames = allStops.map((entry) => entry.value.name).toList();
+  }
+
+  int calculateCurrentIndex() {
+    final now = TimeOfDay.now();
+    int currentIndex = 0;
+
+    for (var entry in stopTimes.entries) {
+      final parts = entry.value.split(':');
+      if (parts.length < 2) continue;
+      final hour = int.tryParse(parts[0]) ?? 0;
+      final minute = int.tryParse(parts[1]) ?? 0;
+      final stopTime = TimeOfDay(hour: hour, minute: minute);
+
+      if (stopTime.hour > now.hour ||
+          (stopTime.hour == now.hour && stopTime.minute > now.minute)) {
+        break;
+      }
+      currentIndex = entry.key;
+    }
+
+    return currentIndex;
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final currentStop = direction[currentTimelineIndex].name;
+    final endStop = direction.last.name;
+    final nextTime = stopTimes[currentTimelineIndex] ?? 'Нет времени';
+    final remainingStopsCount = direction.length - 1 - currentTimelineIndex;
 
     return Scaffold(
       appBar: AppBar(title: Text('$currentStop - $endStop')),
@@ -69,34 +123,28 @@ class ScreenRouteDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const VerticalTimelineWidget(),
             RouteHeader(
-              routeName: route.routeShortName,
+              routeName: widget.route.routeShortName,
               currentStop: currentStop,
               endStop: endStop,
-              color: color,
+              color: widget.color,
+
             ),
             const SizedBox(height: 8),
-            ArrivalInfo(currentTime: currentTime),
-            const SizedBox(height: 8),
-            ExpansionTile(
-              title: Text('$remainingStopsCount остановок'),
-              children: allStops.map((entry) {
-                final stopTime = stopTimes[entry.key] ?? 'Нет времени';
-                return StopTile(
-                  stopName: entry.value.name,
-                  stopTime: stopTime,
-                );
-              }).toList(),
+            Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: ArrivalBadge(nextTime: nextTime),
             ),
             const SizedBox(height: 8),
+            BusRouteTimeline(
+              stops: stopNames,
+              stopTimes: stopTimes,
+              currentIndex: currentTimelineIndex,
+            ),
+            const SizedBox(height: 16),
             Text(
-              '${endStop.toUpperCase()}: $endTime',
-              style: const TextStyle(
-                fontSize: 18,
-                fontFamily: 'Century_Gothic',
-                fontWeight: FontWeight.bold,
-              ),
+              'Осталось остановок: $remainingStopsCount',
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
@@ -104,4 +152,3 @@ class ScreenRouteDetail extends StatelessWidget {
     );
   }
 }
-
