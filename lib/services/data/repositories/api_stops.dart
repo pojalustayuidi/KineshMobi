@@ -11,8 +11,8 @@ class ApiStops {
   ApiStops()
       : _dio = Dio(BaseOptions(
   baseUrl: 'https://wheremybus.fluttersquad.dev/api/v1',
-  connectTimeout: const Duration(seconds: 5),
-  receiveTimeout: const Duration(seconds: 3),
+  connectTimeout: const Duration(seconds: 30),
+  receiveTimeout: const Duration(seconds: 30),
   ));
   Future <List<Stop>> getStopsList() async {
     try {

@@ -6,7 +6,7 @@ class IconsLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: Image.asset(scale: 1,
+      child: Image.asset(
         'assets/apppppppppp.png',
 
       ),
