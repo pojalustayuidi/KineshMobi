@@ -37,7 +37,6 @@ class _ScreenRouteDetailState extends State<ScreenRouteDetail> {
     super.initState();
     prepareStops();
     currentTimelineIndex = calculateCurrentIndex();
-    // обновляем текущую остановку каждые 30 секунд
     timer = Timer.periodic(const Duration(seconds: 30), (_) {
       setState(() {
         currentTimelineIndex = calculateCurrentIndex();
@@ -131,10 +130,7 @@ class _ScreenRouteDetailState extends State<ScreenRouteDetail> {
 
             ),
             const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: ArrivalBadge(nextTime: nextTime),
-            ),
+           // ArrivalBadge(nextTime: nextTime),
             const SizedBox(height: 8),
             BusRouteTimeline(
               stops: stopNames,

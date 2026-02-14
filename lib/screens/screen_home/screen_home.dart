@@ -1,6 +1,5 @@
 import 'package:KineshmaApp/screens/screen_home/widgets_home/stop_routes_panel_widget.dart';
 import 'package:flutter/material.dart';
-import '../../main_widget/time_widget.dart';
 import '../../services/data/repositories/api_stops.dart';
 
 class ScreenHomeContent extends StatefulWidget {
@@ -26,7 +25,6 @@ class _ScreenHomeContentState extends State<ScreenHomeContent> {
           flexibleSpace: Align(
             alignment: Alignment.bottomLeft,
             child: SizedBox(
-              child: CurrentTimeWidget(),
             ),
           ),
         ),

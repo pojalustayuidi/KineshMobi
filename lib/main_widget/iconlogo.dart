@@ -8,7 +8,6 @@ class IconsLogo extends StatelessWidget {
     return SizedBox(
       child: Image.asset(
         'assets/apppppppppp.png',
-
       ),
     );
   }

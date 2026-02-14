@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:KineshmaApp/screens/screen_home/widgets_home/full_schedule_card_widget.dart';
-import 'package:KineshmaApp/screens/screen_home/widgets_home/stop_auto_complete_field.dart';
+import 'package:KineshmaApp/screens/screen_home/widgets_home/selected_stop_header.dart';
+import 'package:KineshmaApp/screens/screen_home/widgets_home/simple_stop_search_field.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/tabs_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:KineshmaApp/screens/screen_home/widgets_home/routes_color.dart';
@@ -34,6 +35,7 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
     _loadStops();
     _startMinuteTimer();
   }
+
   void _startMinuteTimer() {
     final now = DateTime.now();
     final int secondsUntilNextMinute = 60 - now.second;
@@ -46,6 +48,7 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
       });
     });
   }
+
   void _updateRoutes() {
     _loadStops();
     if (_selectedStop != null) {
@@ -53,22 +56,18 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
     }
   }
 
-
   @override
   void dispose() {
     timer?.cancel();
     super.dispose();
   }
+
   Future<void> _loadStops() async {
     final stops = await widget.apiStops.getStopsList();
     setState(() {
       _allStops = stops;
     });
   }
-
-
-
-
 
   String _getNextArrivalTime(List<String> arrivalTimes) {
     final now = DateTime.now();
@@ -92,10 +91,8 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
 
     if (selectedStop == null) {
       setState(() {
-        _nearestWidgets = [const Text('Введите свою остановку в поле выше')];
-        _fullScheduleWidgets = [
-          const Text('Введите свою остановку в поле выше')
-        ];
+        _nearestWidgets = [];
+        _fullScheduleWidgets = [];
       });
       return;
     }
@@ -104,8 +101,8 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
 
     if (routes.isEmpty) {
       setState(() {
-        _nearestWidgets = [const Text('Маршруты не найдены')];
-        _fullScheduleWidgets = [const Text('Маршруты не найдены')];
+        _nearestWidgets = [const MessageDisplay(message: 'Маршруты не найдены')];
+        _fullScheduleWidgets = [const MessageDisplay(message: 'Маршруты не найдены')];
       });
       return;
     }
@@ -120,7 +117,7 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
         final index = direction.indexWhere((s) => s.stopId == selectedStop.id);
         if (index != -1) {
           final nextArrival =
-              _getNextArrivalTime(direction[index].arrivalTimes);
+          _getNextArrivalTime(direction[index].arrivalTimes);
           nearestCards.add({
             'route': route,
             'direction': direction,
@@ -142,14 +139,14 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
     setState(() {
       _nearestWidgets = nearestCards.isNotEmpty
           ? nearestCards
-              .map((card) => RouteCard(
-                    route: card['route'],
-                    direction: card['direction'],
-                    color: card['color'],
-                    stopId: card['stopId'],
+          .map((card) => RouteCard(
+        route: card['route'],
+        direction: card['direction'],
+        color: card['color'],
+        stopId: card['stopId'],
         nextArrival: card['nextArrival'],
-                  ))
-              .toList()
+      ))
+          .toList()
           : [const MessageDisplay(message: 'Маршруты не найдены')];
 
       _fullScheduleWidgets = fullCards.isNotEmpty
@@ -158,9 +155,28 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
     });
   }
 
+  // Метод для смены остановки
+  void _changeStop() {
+    setState(() {
+      _selectedStop = null;
+      _nearestWidgets = [];
+      _fullScheduleWidgets = [];
+    });
+  }
+
+  // Метод для очистки остановки
+  void _clearStop() {
+    setState(() {
+      _selectedStop = null;
+      _nearestWidgets = [];
+      _fullScheduleWidgets = [];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -169,28 +185,97 @@ class _StopRoutesPanelState extends State<StopRoutesPanel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              StopAutocompleteField(
-                stops: _allStops,
-                selectedStop: _selectedStop,
-                onChanged: _searchRoute,
-                width: screenWidth * 0.85,
-              ),
-              const SizedBox(height: 16),
-              TabsSchedules(
-                nearestWidget: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [..._nearestWidgets],
-                ),
-                fullScheduleWidget: Column(
+              // Всегда показываем поле поиска (если не выбрана остановка)
+              if (_selectedStop == null)
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ..._fullScheduleWidgets,
-                    SizedBox(
-                      width: 50,
-                    )
+                    // Красивая подсказка над полем поиска
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[50],
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.blue[100]!,
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.info_outline,
+                            color: Colors.blue[700],
+                            size: 20,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Найдите свою остановку',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Franklin_Gothic_Medium',
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.blue[700],
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Начните вводить название остановки, чтобы увидеть расписание маршрутов',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'Franklin_Gothic_Medium',
+                                    color: Colors.grey[600],
+                                    height: 1.4,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Поле поиска
+                    SimpleStopSearchField(
+                      stops: _allStops,
+                      selectedStop: _selectedStop,
+                      onChanged: _searchRoute,
+                      width: screenWidth * 0.9,
+                    ),
                   ],
+                )
+              else
+              // Если остановка выбрана - показываем заголовок
+                SelectedStopHeader(
+                  selectedStop: _selectedStop!,
+                  onTapChange: _changeStop,
+                  onTapClear: _clearStop,
                 ),
-              ),
+
+              const SizedBox(height: 16),
+
+              // Показываем табы только если остановка выбрана
+              if (_selectedStop != null)
+                TabsSchedules(
+                  nearestWidget: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [..._nearestWidgets],
+                  ),
+                  fullScheduleWidget: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ..._fullScheduleWidgets,
+                      const SizedBox(width: 50),
+                    ],
+                  ),
+                ),
             ],
           ),
         ),

@@ -5,7 +5,6 @@ import 'package:KineshmaApp/services/data/models/route_destination.dart';
 import 'package:flutter/material.dart';
 
 import '../../../main_widget/arrival_badge.dart';
-import '../../../main_widget/route_direction_text.dart';
 
 class RouteCard extends StatefulWidget {
   final RouteDestation route;
@@ -32,8 +31,8 @@ class _RouteCardState extends State<RouteCard> {
     final isForward = widget.direction == widget.route.forward;
 
     int stopIndex =
-        adjustedDirection.indexWhere((s) => s.stopId == widget.stopId);
-    if (stopIndex == -1) return SizedBox();
+    adjustedDirection.indexWhere((s) => s.stopId == widget.stopId);
+    if (stopIndex == -1) return const SizedBox();
 
     if (!isForward) {
       adjustedDirection = adjustedDirection.reversed.toList();
@@ -41,7 +40,7 @@ class _RouteCardState extends State<RouteCard> {
           adjustedDirection.indexWhere((s) => s.stopId == widget.stopId);
     }
 
-    final start = adjustedDirection[stopIndex].name.toUpperCase();
+    adjustedDirection[stopIndex].name.toUpperCase();
     final end = adjustedDirection.last.name.toUpperCase();
     final stop = adjustedDirection[stopIndex];
     final nextTime = findNextArrivalTime(stop.arrivalTimes) ??
@@ -51,9 +50,9 @@ class _RouteCardState extends State<RouteCard> {
         .asMap()
         .entries
         .where((entry) {
-          final index = entry.key;
-          return index > stopIndex;
-        })
+      final index = entry.key;
+      return index > stopIndex;
+    })
         .map((entry) => entry.value.name)
         .take(3)
         .join(', ');
@@ -72,86 +71,89 @@ class _RouteCardState extends State<RouteCard> {
           ),
         );
       },
-      child: SafeArea(
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.9,
+        margin: const EdgeInsets.symmetric(vertical: 2),
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
-          color: Color(0xFFFFFFFF),
-          elevation: 2,
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          color: Colors.white,
+          elevation: 3,
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(2.0),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [  const SizedBox(width: 10),
                 Container(
-                  width: 48,
-                  height: 48,
+                  width: 42,
+                  height: 42,
                   decoration: BoxDecoration(
                     color: widget.color,
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: widget.color.withOpacity(0.3),
+                        blurRadius: 6,
+                        offset: const Offset(0, 4),
+                      )
+                    ],
                   ),
                   alignment: Alignment.center,
                   child: Text(
                     widget.route.routeShortName,
-                    style: TextStyle(
-                      fontSize: 32,
+                    style: const TextStyle(
+                      fontSize: 20,
                       fontFamily: 'Franklin_Gothic_Medium',
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                       color: Colors.black,
                     ),
                   ),
                 ),
-                SizedBox(width: 12),
+
+
+                const SizedBox(width: 10),
+
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: RouteDirectionText(
-                              start: start.toUpperCase(),
-                              end: end.toUpperCase(),
-                            ),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.133,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          end,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Franklin_Gothic_Medium',
+                            fontWeight: FontWeight.w900,
+                            color: Colors.black,
                           ),
-                          // Иконка сердца
-                          // GestureDetector(
-                          //   child: Icon(
-                          //     Icons.favorite_border_outlined,
-                          //     size: 20,
-                          //     color: Colors.grey,
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                      SizedBox(height: 4),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                keyStops.isNotEmpty
-                                    ? keyStops.toUpperCase()
-                                    : 'Нет промежуточных остановок',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: 'Franklin_Gothic_Medium',
-                                  color: Colors.grey,
-                                ),
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            ArrivalBadge(nextTime: nextTime),
-                          ]),
-                    ],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+
+                        Text(
+                          keyStops.isNotEmpty
+                              ? keyStops
+                              : 'Нет промежуточных остановок',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontFamily: 'Franklin_Gothic_Medium',
+                            color: Color(0xFF666666),
+                            fontWeight: FontWeight.w400,
+                            height: 1.2,
+                          ),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+
+                const SizedBox(width: 8),
+                ArrivalBadge(nextTime: nextTime),
               ],
             ),
           ),

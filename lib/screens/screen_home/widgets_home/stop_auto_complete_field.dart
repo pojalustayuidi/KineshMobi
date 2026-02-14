@@ -22,7 +22,28 @@ class StopAutocompleteField extends StatefulWidget {
 }
 
 class _StopAutocompleteFieldState extends State<StopAutocompleteField> {
-  bool _isDropdownRequested = false;
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+    if (widget.selectedStop != null) {
+      _controller.text = widget.selectedStop!.name;
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant StopAutocompleteField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.selectedStop != oldWidget.selectedStop) {
+      if (widget.selectedStop != null) {
+        _controller.text = widget.selectedStop!.name;
+      } else {
+        _controller.clear();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,56 +51,73 @@ class _StopAutocompleteFieldState extends State<StopAutocompleteField> {
       width: widget.width ?? double.infinity,
       child: Autocomplete<Stop>(
         optionsBuilder: (TextEditingValue textEditingValue) {
-          if (textEditingValue.text.isEmpty && !_isDropdownRequested) {
+          if (textEditingValue.text.isEmpty) {
             return const Iterable<Stop>.empty();
           }
+
+          final query = textEditingValue.text.toLowerCase();
           return widget.stops.where((Stop stop) {
-            return textEditingValue.text.isEmpty ||
-                stop.name.toLowerCase().contains(textEditingValue.text.toLowerCase());
+            return stop.name.toLowerCase().contains(query);
           });
         },
+
         displayStringForOption: (Stop stop) => stop.name,
+
         onSelected: (Stop stop) {
-          FocusScope.of(context).unfocus();
           widget.onChanged(stop);
-          setState(() => _isDropdownRequested = false);
+          FocusScope.of(context).unfocus();
         },
-        fieldViewBuilder: (BuildContext context,
+
+        optionsViewBuilder: (context, onSelected, options) {
+          return Align(
+            alignment: Alignment.topLeft,
+            child: Material(
+              elevation: 4,
+              child: Container(
+                width: widget.width ?? double.infinity,
+                constraints: const BoxConstraints(maxHeight: 200),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  itemCount: options.length,
+                  itemBuilder: (context, index) {
+                    final option = options.elementAt(index);
+                    return ListTile(
+                      title: Text(option.name),
+                      onTap: () => onSelected(option),
+                    );
+                  },
+                ),
+              ),
+            ),
+          );
+        },
+        fieldViewBuilder: (
+            BuildContext context,
             TextEditingController controller,
             FocusNode focusNode,
-            VoidCallback onFieldSubmitted) {
-          if (widget.selectedStop != null && controller.text.isEmpty) {
-            controller.text = widget.selectedStop!.name;
+            VoidCallback onFieldSubmitted,
+            ) {
+
+          if (_controller.text != controller.text) {
+            _controller.text = controller.text;
           }
 
           return AppTextField(
             controller: controller,
             focusNode: focusNode,
             hint: 'Ваша остановка',
-            isDropdownRequested: _isDropdownRequested,
+            isDropdownRequested: controller.text.isNotEmpty,
             onClear: () {
               controller.clear();
               widget.onChanged(null);
-              setState(() => _isDropdownRequested = false);
             },
             onToggleDropdown: () {
-              setState(() => _isDropdownRequested = !_isDropdownRequested);
-              if (_isDropdownRequested) {
-                focusNode.requestFocus();
-              } else {
-                FocusScope.of(context).unfocus();
-              }
+              focusNode.requestFocus();
             },
             onChanged: (value) {
               if (value.isEmpty) {
                 widget.onChanged(null);
-                setState(() => _isDropdownRequested = false);
-              } else {
-                final matchingStop = widget.stops.firstWhere(
-                      (stop) => stop.name.toLowerCase() == value.toLowerCase(),
-                  orElse: () => Stop(name: value, id: -1),
-                );
-                widget.onChanged(matchingStop);
               }
             },
             onSubmitted: (_) => onFieldSubmitted(),
@@ -87,5 +125,11 @@ class _StopAutocompleteFieldState extends State<StopAutocompleteField> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
